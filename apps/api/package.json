@@ -1,0 +1,32 @@
+{
+  "name": "@portfolio/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "dev": "tsc-watch -p tsconfig.build.json --onSuccess \"node ../../dist/apps/api/src/main.js\"",
+    "start": "node ../../dist/apps/api/src/main.js",
+    "test:unit": "tsc -p tsconfig.test.json && node --test ../../dist/test/apps/api/test/unit.test.js ../../dist/test/apps/api/test/content.unit.test.js",
+    "test:integration": "tsc -p tsconfig.test.json && node --test ../../dist/test/apps/api/test/integration.test.js ../../dist/test/apps/api/test/content.integration.test.js"
+  },
+  "dependencies": {
+    "@nestjs/common": "12.4.2",
+    "@nestjs/core": "12.4.2",
+    "@nestjs/platform-express": "12.4.2",
+    "@nestjs/config": "12.1.1",
+    "@nestjs/swagger": "12.1.1",
+    "@nestjs/throttler": "6.7.1",
+    "class-transformer": "0.5.1",
+    "class-validator": "0.15.1",
+    "helmet": "8.3.0",
+    "reflect-metadata": "0.2.2",
+    "rxjs": "7.8.2"
+  },
+  "devDependencies": {
+    "@nestjs/testing": "12.4.2",
+    "@types/express": "5.0.6",
+    "tsc-watch": "7.2.0"
+  }
+}

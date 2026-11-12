@@ -1,0 +1,274 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum AvailabilityStatus {
+  AVAILABLE
+  OPEN_TO_OPPORTUNITIES
+  UNAVAILABLE
+}
+
+enum TechnologyCategory {
+  FRONTEND
+  BACKEND
+  DATABASE
+  ORM
+  DEVOPS
+  CLOUD
+  TESTING
+  SECURITY
+  MOBILE
+  TOOLS
+}
+
+enum ProjectStatus {
+  PLANNED
+  IN_DEVELOPMENT
+  DEMO_AVAILABLE
+  COMPLETED
+  ARCHIVED
+}
+
+enum ProjectType {
+  PERSONAL
+  COMMERCIAL
+  SAAS
+  ACADEMIC
+  OPEN_SOURCE
+  LABORATORY
+}
+
+enum MediaType {
+  IMAGE
+  VIDEO
+  DIAGRAM
+}
+
+enum DeploymentProvider {
+  AWS
+  AZURE
+  GOOGLE_CLOUD
+  VERCEL
+  NETLIFY
+  CLOUDFLARE
+  OTHER
+}
+
+enum DeploymentStatus {
+  PLANNED
+  ACTIVE
+  INACTIVE
+  FAILED
+}
+
+enum DeploymentEnvironment {
+  DEVELOPMENT
+  STAGING
+  PRODUCTION
+}
+
+enum EmploymentType {
+  FULL_TIME
+  PART_TIME
+  CONTRACT
+  FREELANCE
+  INTERNSHIP
+  OTHER
+}
+
+enum SecurityLabStatus {
+  PLANNED
+  IN_PROGRESS
+  COMPLETED
+}
+
+enum ContactMessageStatus {
+  NEW
+  READ
+  ARCHIVED
+}
+
+model Profile {
+  id                 String             @id @default(uuid()) @db.Uuid
+  // CHECK SQL + UNIQUE: solo existe un slot válido para el perfil principal.
+  singleton          Boolean            @unique @default(true)
+  fullName           String             @db.VarChar(160)
+  professionalTitle  String             @db.VarChar(200)
+  headline           String?            @db.VarChar(300)
+  biography          String?            @db.Text
+  location           String?            @db.VarChar(200)
+  email              String?            @db.VarChar(254)
+  githubUrl          String?            @db.Text
+  linkedinUrl        String?            @db.Text
+  resumeUrl          String?            @db.Text
+  availabilityStatus AvailabilityStatus @default(UNAVAILABLE)
+  createdAt          DateTime           @default(now()) @db.Timestamptz(3)
+  updatedAt          DateTime           @updatedAt @db.Timestamptz(3)
+}
+
+model Technology {
+  id          String              @id @default(uuid()) @db.Uuid
+  name        String              @db.VarChar(100)
+  slug        String              @unique @db.VarChar(120)
+  category    TechnologyCategory
+  description String?             @db.Text
+  iconUrl     String?             @db.Text
+  websiteUrl  String?             @db.Text
+  isFeatured  Boolean             @default(false)
+  sortOrder   Int                 @default(0)
+  createdAt   DateTime            @default(now()) @db.Timestamptz(3)
+  updatedAt   DateTime            @updatedAt @db.Timestamptz(3)
+  projects    ProjectTechnology[]
+
+  @@index([category, sortOrder])
+}
+
+model Project {
+  id                  String              @id @default(uuid()) @db.Uuid
+  name                String              @db.VarChar(160)
+  slug                String              @unique @db.VarChar(180)
+  summary             String?             @db.VarChar(500)
+  description         String?             @db.Text
+  problem             String?             @db.Text
+  solution            String?             @db.Text
+  architecture        String?             @db.Text
+  technicalChallenges String?             @db.Text
+  status              ProjectStatus       @default(PLANNED)
+  projectType         ProjectType?
+  repositoryUrl       String?             @db.Text
+  demoUrl             String?             @db.Text
+  documentationUrl    String?             @db.Text
+  coverImageUrl       String?             @db.Text
+  isFeatured          Boolean             @default(false)
+  isPublished         Boolean             @default(false)
+  sortOrder           Int                 @default(0)
+  startedAt           DateTime?           @db.Date
+  completedAt         DateTime?           @db.Date
+  createdAt           DateTime            @default(now()) @db.Timestamptz(3)
+  updatedAt           DateTime            @updatedAt @db.Timestamptz(3)
+  technologies        ProjectTechnology[]
+  media               ProjectMedia[]
+  deployments         ProjectDeployment[]
+
+  @@index([isPublished, isFeatured, sortOrder])
+  @@index([status])
+}
+
+model ProjectTechnology {
+  projectId    String     @db.Uuid
+  technologyId String     @db.Uuid
+  project      Project    @relation(fields: [projectId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  technology   Technology @relation(fields: [technologyId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+
+  @@id([projectId, technologyId])
+  @@index([technologyId])
+}
+
+model ProjectMedia {
+  id        String    @id @default(uuid()) @db.Uuid
+  projectId String    @db.Uuid
+  mediaType MediaType
+  url       String    @db.Text
+  altText   String?   @db.VarChar(500)
+  caption   String?   @db.Text
+  sortOrder Int       @default(0)
+  createdAt DateTime  @default(now()) @db.Timestamptz(3)
+  project   Project   @relation(fields: [projectId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@index([projectId, sortOrder])
+}
+
+model ProjectDeployment {
+  id               String                @id @default(uuid()) @db.Uuid
+  projectId        String                @db.Uuid
+  provider         DeploymentProvider
+  environment      DeploymentEnvironment
+  deploymentUrl    String?               @db.Text
+  deploymentStatus DeploymentStatus      @default(PLANNED)
+  region           String?               @db.VarChar(100)
+  description      String?               @db.Text
+  deployedAt       DateTime?             @db.Timestamptz(3)
+  createdAt        DateTime              @default(now()) @db.Timestamptz(3)
+  updatedAt        DateTime              @updatedAt @db.Timestamptz(3)
+  project          Project               @relation(fields: [projectId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@index([projectId, environment, deploymentStatus])
+}
+
+model Experience {
+  id             String          @id @default(uuid()) @db.Uuid
+  organization   String          @db.VarChar(200)
+  position       String          @db.VarChar(200)
+  employmentType EmploymentType?
+  location       String?         @db.VarChar(200)
+  description    String?         @db.Text
+  startedAt      DateTime        @db.Date
+  endedAt        DateTime?       @db.Date
+  isCurrent      Boolean         @default(false)
+  sortOrder      Int             @default(0)
+  createdAt      DateTime        @default(now()) @db.Timestamptz(3)
+  updatedAt      DateTime        @updatedAt @db.Timestamptz(3)
+
+  @@index([sortOrder, startedAt])
+}
+
+model Education {
+  id           String    @id @default(uuid()) @db.Uuid
+  institution  String    @db.VarChar(200)
+  degree       String    @db.VarChar(200)
+  fieldOfStudy String?   @db.VarChar(200)
+  description  String?   @db.Text
+  startedAt    DateTime  @db.Date
+  completedAt  DateTime? @db.Date
+  createdAt    DateTime  @default(now()) @db.Timestamptz(3)
+  updatedAt    DateTime  @updatedAt @db.Timestamptz(3)
+}
+
+model Certification {
+  id            String    @id @default(uuid()) @db.Uuid
+  name          String    @db.VarChar(200)
+  issuer        String    @db.VarChar(200)
+  credentialUrl String?   @db.Text
+  issuedAt      DateTime  @db.Date
+  expiresAt     DateTime? @db.Date
+  createdAt     DateTime  @default(now()) @db.Timestamptz(3)
+  updatedAt     DateTime  @updatedAt @db.Timestamptz(3)
+}
+
+model SecurityLab {
+  id            String            @id @default(uuid()) @db.Uuid
+  title         String            @db.VarChar(200)
+  slug          String            @unique @db.VarChar(220)
+  summary       String?           @db.VarChar(500)
+  description   String?           @db.Text
+  methodology   String?           @db.Text
+  toolsUsed     String[]          @default([])
+  findings      String?           @db.Text
+  remediation   String?           @db.Text
+  repositoryUrl String?           @db.Text
+  reportUrl     String?           @db.Text
+  status        SecurityLabStatus @default(PLANNED)
+  isPublished   Boolean           @default(false)
+  createdAt     DateTime          @default(now()) @db.Timestamptz(3)
+  updatedAt     DateTime          @updatedAt @db.Timestamptz(3)
+
+  @@index([isPublished, status])
+}
+
+model ContactMessage {
+  id          String               @id @default(uuid()) @db.Uuid
+  senderName  String               @db.VarChar(160)
+  senderEmail String               @db.VarChar(254)
+  subject     String               @db.VarChar(250)
+  message     String               @db.Text
+  status      ContactMessageStatus @default(NEW)
+  createdAt   DateTime             @default(now()) @db.Timestamptz(3)
+  updatedAt   DateTime             @updatedAt @db.Timestamptz(3)
+
+  @@index([status, createdAt])
+}

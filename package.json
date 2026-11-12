@@ -1,0 +1,52 @@
+{
+  "name": "portfolio-noviembre-2026",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=24 <25" },
+  "workspaces": ["apps/*", "packages/*"],
+  "overrides": {
+    "minimatch": "11.0.1"
+  },
+  "scripts": {
+    "db:up": "docker compose up -d --wait",
+    "db:stop": "docker compose stop",
+    "db:validate": "prisma validate",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate dev",
+    "db:deploy": "prisma migrate deploy",
+    "db:status": "prisma migrate status",
+    "db:seed": "prisma db seed",
+    "db:verify": "tsx scripts/verify-database.ts",
+    "db:verify-persistence": "tsx scripts/verify-persistence.ts",
+    "typecheck": "tsc --noEmit && npm run typecheck --workspace @portfolio/api && npm run typecheck --workspace @portfolio/web",
+    "web:dev": "npm run dev --workspace @portfolio/web",
+    "web:build": "npm run build --workspace @portfolio/web",
+    "web:start": "npm run start --workspace @portfolio/web",
+    "web:test": "npm run test --workspace @portfolio/web",
+    "web:test:e2e": "npm run test:e2e --workspace @portfolio/web",
+    "api:dev": "npm run dev --workspace @portfolio/api",
+    "api:build": "npm run build --workspace @portfolio/api",
+    "api:start": "npm run start --workspace @portfolio/api",
+    "api:smoke": "npm run api:build && node scripts/smoke-api.mjs",
+    "lint": "eslint .",
+    "test:unit": "npm run test:unit --workspace @portfolio/api",
+    "test:integration": "npm run test:integration --workspace @portfolio/api"
+  },
+  "dependencies": {
+    "@prisma/adapter-pg": "7.10.1",
+    "@prisma/client": "7.10.1",
+    "dotenv": "18.0.10",
+    "pg": "8.23.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@types/node": "24.19.2",
+    "@types/pg": "8.23.1",
+    "prisma": "7.10.1",
+    "eslint": "10.14.0",
+    "typescript-eslint": "8.72.2",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3"
+  }
+}
