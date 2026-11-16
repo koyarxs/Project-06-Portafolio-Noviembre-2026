@@ -61,16 +61,47 @@ test('publishes only API-returned slugs in the sitemap and protects local indexi
   expect(robots).toContain('Disallow: /');
 });
 
-test('keeps the owner portfolio visible without exposing private repository links when the API is offline', async ({ request }) => {
+test('keeps the authorized portfolio content visible when the API is offline', async ({ request }) => {
   await request.post('http://127.0.0.1:4011/_test/mode?mode=unavailable');
   const home = await request.get('/');
   const html = await home.text();
   expect(home.status()).toBe(200);
   for (const name of ['Yerko Barrera', 'Pawly', 'Zenvik', 'FraudShield', 'Falta Uno', 'FlyMaster']) expect(html).toContain(name);
-  expect(html).toContain('/images/yerko-linkedin.jpg');
+  expect(html).toContain('/images/yerko-hero-v2.png');
   expect(html).toContain('https://flymaster.cl');
-  expect(html).not.toContain('github.com/koyarxs/Project-02-FlyMaster');
+  expect(html).toContain('github.com/koyarxs/Project-02-FlyMaster');
+  expect(html).toContain('Repositorio privado');
   const contact = await (await request.get('/contacto')).text();
   expect(contact).toContain('https://github.com/koyarxs');
   expect(contact).toContain('linkedin.com/in/yerko-andr');
+});
+
+
+test('renders the Veltrix guestbook and the three interaction circles', async ({ request }) => {
+  const html = await (await request.get('/')).text();
+  expect(html.includes('COMUNIDAD / YB VELTRIX SOLUTIONS')).toBe(true);
+  expect(html).toContain('id="comentarios"');
+  expect(html).toContain('Nombre público');
+  expect(html).toContain('Categoría');
+  expect(/maxLength="2000"/i.test(html)).toBe(true);
+  expect(html).toContain('Visitas, Me gusta y comentarios');
+  expect(html).toContain('Lo que dicen');
+  expect(html).not.toContain('Quiero comentar sobre');
+});
+test('rejects cross-origin writes, unauthenticated moderation and forged sessions', async ({ request }) => {
+  for (const path of ['/api/community','/api/community/uploads','/api/visitors','/api/community-admin/session']) {
+    const response = await request.post(path,{ headers:{ Origin:'https://untrusted.example' },data:{ action:'like',liked:true,password:'incorrect' } });
+    expect(response.status()).toBe(403);
+  }
+  expect((await request.get('/api/community-admin')).status()).toBe(403);
+  expect((await request.get('/api/community-admin',{ headers:{ Cookie:'yb-owner=forged' } })).status()).toBe(403);
+  const admin = await (await request.get('/admin/community')).text();
+  expect(admin).toContain('noindex');
+  expect(admin).not.toContain('COMMUNITY_ADMIN_TOKEN=');
+});
+
+
+test('accepts the actual local origin even when Next normalizes its internal URL', async ({ request }) => {
+  const response = await request.post('/api/visitors',{ headers:{ Origin:'http://127.0.0.1:3101' } });
+  expect(response.status()).not.toBe(403);
 });

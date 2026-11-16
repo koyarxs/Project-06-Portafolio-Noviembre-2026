@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none">
+  <defs>
+    <linearGradient id="base" x1="0" y1="0" x2="1500" y2="900" gradientUnits="userSpaceOnUse"><stop stop-color="#eef5ff"/><stop offset=".46" stop-color="#f5f9ff"/><stop offset="1" stop-color="#d9eaff"/></linearGradient>
+    <linearGradient id="silk" x1="1090" y1="60" x2="1640" y2="810" gradientUnits="userSpaceOnUse"><stop stop-color="#72beff"/><stop offset=".3" stop-color="#287ce6"/><stop offset=".62" stop-color="#124dba"/><stop offset="1" stop-color="#092958"/></linearGradient>
+    <linearGradient id="deep" x1="1300" y1="0" x2="1510" y2="940" gradientUnits="userSpaceOnUse"><stop stop-color="#164b9e"/><stop offset=".55" stop-color="#0e397a"/><stop offset="1" stop-color="#061c40"/></linearGradient>
+    <linearGradient id="rim" x1="1100" y1="0" x2="1530" y2="800" gradientUnits="userSpaceOnUse"><stop stop-color="#c2edff"/><stop offset=".5" stop-color="#6cbaff"/><stop offset="1" stop-color="#2e7ee3"/></linearGradient>
+    <linearGradient id="bottom" x1="100" y1="840" x2="1500" y2="1000" gradientUnits="userSpaceOnUse"><stop stop-color="#d2e8ff"/><stop offset=".5" stop-color="#a4ceff"/><stop offset="1" stop-color="#447ddd"/></linearGradient>
+    <radialGradient id="halo"><stop stop-color="#fff" stop-opacity=".95"/><stop offset=".63" stop-color="#f0f7ff" stop-opacity=".86"/><stop offset="1" stop-color="#edf6ff" stop-opacity="0"/></radialGradient>
+  </defs>
+  <path d="M0 0h1600v1000H0z" fill="url(#base)"/>
+  <path d="M1090-80c-33 151 50 212 238 277 231 80 103 238 83 341-34 173 150 258 269 329V-80Z" fill="url(#silk)"/>
+  <path d="M1250-80c-50 158 13 229 190 302 180 75 73 220 70 333-4 154 95 211 170 239V-80Z" fill="url(#deep)"/>
+  <path d="M1090-80c-33 151 50 212 238 277 231 80 103 238 83 341-34 173 150 258 269 329" stroke="url(#rim)" stroke-width="4"/>
+  <path d="M0 926c275-112 512-55 754-13 267 47 512-103 846-10v97H0Z" fill="url(#bottom)" fill-opacity=".6"/>
+  <path d="M0 947c314-112 527-39 784-14 297 30 504-111 816-8" stroke="#fff" stroke-opacity=".6" stroke-width="2"/>
+  <ellipse cx="1080" cy="492" rx="470" ry="462" fill="url(#halo)"/>
+  <ellipse cx="350" cy="390" rx="530" ry="470" fill="url(#halo)" opacity=".7"/>
+  <path d="M-70-30c200 33 272 125 262 271" stroke="#c3dfff" stroke-opacity=".25" stroke-width="110"/>
+</svg>

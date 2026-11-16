@@ -1,86 +1,89 @@
-# Yerko Barrera · Portafolio Full Stack
+# Yerko Barrera · YB Veltrix Solutions
 
-Portafolio profesional de **Yerko Andrés Barrera Pantoja**, Ingeniero en Computación e Informática. Monorepositorio con frontend Next.js, API REST NestJS y PostgreSQL con Prisma ORM.
+Portafolio profesional de **Yerko Andrés Barrera Pantoja**, Ingeniero en Computación e Informática y Licenciado en Ingeniería por la Universidad Andrés Bello. Experiencia, proyectos y tecnologías de desarrollo Full Stack, reunidos en una aplicación con **Next.js, NestJS y PostgreSQL**.
 
-Estado guardado al **12 de noviembre de 2026**: base de datos, backend, API pública y primera versión del frontend implementados. Diseño azul cobalto, blanco y amarillo, foto real de LinkedIn, navegación responsive y selección de proyectos actuales. En desarrollo local; todavía no está desplegado.
+[GitHub](https://github.com/koyarxs) · [LinkedIn](https://www.linkedin.com/in/yerko-andr%C3%A9s-barrera-pantoja-a82821123/) · [Documentación del frontend](docs/frontend.md)
 
-![Vista del portafolio](docs/images/portfolio-preview.jpg)
+![Portada y navegación de YB Veltrix Solutions](docs/images/navbar-premium-desktop.jpg)
 
-## Qué incluye
+## Estado actual
 
-- Portada personal con foto, stack, proyectos y presentación profesional.
-- Navbar con menú móvil accesible y footer con enlaces profesionales.
-- Proyectos con capturas, contexto, tecnologías y estado real de desarrollo.
-- Rutas de perfil, trayectoria, laboratorios, contacto y casos de proyecto.
-- API de consulta con validación, paginación, filtros, documentación Swagger y respuestas controladas.
-- PostgreSQL en Docker, once modelos Prisma, migración inicial y seed idempotente.
-- Pruebas de componentes, contratos y API; revisión visual de escritorio y móvil.
+Actualizado el **16 de noviembre de 2026**. Desarrollo local; este repositorio no acredita un despliegue de producción. El frontend editorial puede consultarse sin backend; las funciones de comunidad, visitas y administración requieren la API, PostgreSQL y su configuración.
 
-## Stack
+## Novedades de esta versión
+
+- **Navegación en tres niveles:** barra de servicios y atención, logo original centrado y menú de navegación. Incluye servicios desplegables y menú móvil.
+- **Horario de atención:** lunes a viernes de 08:00 a 20:00, zona `America/Santiago`. El indicador se actualiza según el horario; no representa presencia en línea.
+- **Portada animada:** fotografía personal, avatar, escritura progresiva, tecnologías y efectos visuales, con consideración de movimiento reducido.
+- **Galería de proyectos:** banner propio, capturas en composiciones de monitor, tablet y celular, enlaces de GitHub, acceso al sitio de FlyMaster y reverso de tarjetas con la marca Veltrix.
+- **Stack organizado:** Frontend, Backend y Bases de datos; Herramientas y Cloud; Testing, DevOps y Seguridad. Logos, descripciones breves, banners por categoría, circuitos luminosos y recorrido azul/blanco en las tarjetas.
+- **Perfil y trayectoria:** formación, experiencia profesional, actividad de YB Veltrix Solutions, certificaciones y enlaces a documentos.
+- **Footer renovado:** logo real, contacto, navegación, servicios y perfiles profesionales.
+- **Comunidad:** comentarios, respuestas, reacciones, categorías, adjuntos de imágenes, reportes, orden y paginación.
+- **Visitas y moderación:** identidad anónima firmada, contadores persistentes y panel del propietario con gestión de comentarios, reportes y participantes.
+
+Las composiciones de dispositivos reutilizan capturas de escritorio; no son capturas móviles independientes. FraudShield conserva un esquema técnico porque no hay una captura de interfaz disponible. Los usos de AWS, Azure y Google Cloud se presentan como previstos para proyectos y laboratorios.
+
+## Proyectos destacados
+
+| Proyecto | Qué muestra | Tecnologías principales | Enlaces |
+| --- | --- | --- | --- |
+| **Pawly** | Sitio y sistema veterinario; demo en desarrollo | Next.js · NestJS · PostgreSQL | [Repositorio](https://github.com/koyarxs/Project-03-Pawly-Octubre-2026) |
+| **Zenvik** | Gestión de equipos, turnos y permisos; MVP local | React · Next.js · TypeScript · Python · Django REST · PostgreSQL | [Repositorio](https://github.com/koyarxs/Project-05-Zenvik-Octubre-2026) |
+| **FraudShield** | Análisis de transacciones CSV y clasificación de riesgo; proyecto de título | Next.js · NestJS · Prisma | [Repositorio](https://github.com/koyarxs/Project-01-FraudShield-Septiembre-2026) |
+| **Falta Uno** | Plataforma deportiva colaborativa con Jean Paul Gómez; en desarrollo | Angular · NestJS · PostgreSQL | [Repositorio](https://github.com/koyarxs/Project-04-Sistema-Deporte-Octubre-2026) |
+| **FlyMaster** | Sitio de servicios con drones y formación para pilotos | Next.js · React · NestJS · PostgreSQL | [Sitio](https://flymaster.cl) · [Repositorio privado](https://github.com/koyarxs/Project-02-FlyMaster-Octubre-2026) |
+
+El enlace al repositorio privado de FlyMaster requiere autorización; no se publica su código en este portafolio. Los proyectos destacados se mantienen en `apps/web/lib/owner.ts`, independientes de los proyectos privados de la API.
+
+## Arquitectura y stack del repositorio
 
 | Capa | Tecnologías |
 | --- | --- |
-| Frontend | Next.js 16.4.6 · React 19.3.1 · TypeScript 5.9.3 · Tailwind CSS 4.3.5 |
-| Backend | Node.js 24 · NestJS 12.4.2 · Express |
-| Datos | PostgreSQL 18.3 · Prisma ORM y adaptador PostgreSQL 7.10.1 |
-| Herramientas | npm workspaces · Docker Compose · ESLint · Playwright |
+| Frontend | Next.js 16 · React 19 · TypeScript · Tailwind CSS 4 · CSS Modules |
+| Backend | Node.js 24 · NestJS 12 · Express · validación de DTOs · Helmet · límites de solicitudes |
+| Persistencia | PostgreSQL 18 · Prisma ORM 7 · adaptador PostgreSQL · migraciones SQL |
+| Comunidad | BFF de Next.js · identidad anónima firmada · cookies HttpOnly · procesamiento de imágenes con sharp |
+| Pruebas y herramientas | Node Test Runner · Playwright · npm workspaces · ESLint · Docker Compose |
 
-Las versiones de todas las dependencias están fijadas en el `package-lock.json` de la raíz.
-
-## Proyectos de la portada
-
-| Proyecto | Alcance y estado documentado | Enlace público |
-| --- | --- | --- |
-| Pawly | Sitio y sistema veterinario; demo en desarrollo | [Repositorio](https://github.com/koyarxs/Project-03-Pawly-Octubre-2026) |
-| Zenvik | Gestión de equipos, turnos y permisos; MVP local | [Repositorio](https://github.com/koyarxs/Project-05-Zenvik-Octubre-2026) |
-| FraudShield | Análisis de transacciones CSV y clasificación de riesgo; MVP estable | [Repositorio](https://github.com/koyarxs/Project-01-FraudShield-Septiembre-2026) |
-| Falta Uno | Plataforma deportiva colaborativa, junto a Jean Paul Gómez; en desarrollo | [Repositorio](https://github.com/koyarxs/Project-04-Sistema-Deporte-Octubre-2026) |
-| FlyMaster | Sitio corporativo de servicios con drones | [Sitio público](https://flymaster.cl) |
-
-La selección editorial está en `apps/web/lib/owner.ts` y procede de fuentes públicas verificadas. Las capturas son de desarrollo; FraudShield utiliza una ilustración de portada. FlyMaster enlaza a su sitio público y no expone código privado. Cada proyecto conserva su stack real, incluido Django REST en Zenvik y Angular en Falta Uno.
-
-Esta selección es independiente de los registros de la API: **no publica los proyectos privados de la base de datos**. Las rutas de casos siguen exigiendo contenido publicado.
-
-## Estructura
+Las dependencias exactas están fijadas en `package-lock.json`. El stack profesional mostrado en la web es más amplio que las dependencias de este repositorio: incluye Angular, Python y Django REST por Falta Uno y Zenvik, además de otras herramientas del perfil.
 
 ```text
 apps/
-  web/                    # Next.js App Router: páginas, componentes y pruebas
-  api/                    # NestJS: módulos de contenido, configuración y pruebas
-packages/database/src/    # Fábrica del cliente Prisma
+  web/                       # App Router, diseño, BFF, panel y pruebas web
+  api/                       # API REST, visitantes, comunidad y moderación
+packages/
+  database/src/              # Cliente Prisma compartido
+  community/src/             # Contratos e identidad compartidos
 prisma/
-  schema.prisma           # Once modelos y enumeraciones
-  migrations/             # Migración inicial e historial SQL
-  seed.ts                 # Catálogo inicial idempotente
-scripts/                  # Verificación de integridad, persistencia y API
-docs/                    # Documentación técnica y captura de la interfaz
-compose.yml               # PostgreSQL local con volumen persistente
-prisma.config.ts          # Configuración de Prisma 7
+  schema.prisma              # Modelo de contenido, visitas e interacciones
+  migrations/                # Historial SQL, incluidas ampliaciones de comunidad
+  seed.ts                    # Catálogo inicial idempotente
+scripts/                     # Configuración y verificaciones locales
+docs/                        # Arquitectura, operación, fuentes y capturas
+compose.yml                  # PostgreSQL local con volumen persistente
 ```
 
-## Ejecutar el frontend
+## Inicio rápido: frontend
 
-Requisitos: Node.js 24 LTS y npm. Desde la raíz, en PowerShell:
+Requisitos: **Node.js 24**, npm y PowerShell o una terminal compatible.
 
 ```powershell
 npm ci
+if (!(Test-Path .env)) { Copy-Item .env.example .env }
+npm run db:generate
 npm run web:dev
 ```
 
-Abrir [http://127.0.0.1:3000](http://127.0.0.1:3000).
+Abrir [http://127.0.0.1:3000](http://127.0.0.1:3000). Para configurar la web, copiar `apps/web/.env.example` a `apps/web/.env.local`, conservando cualquier archivo existente. Las funciones conectadas muestran estados de conexión cuando la API no está disponible.
 
-La portada, sus proyectos externos y los contactos funcionan sin la API. Las secciones conectadas al backend muestran estados vacíos o de conexión cuando no hay datos disponibles.
+## Base de datos y API
 
-Configuración opcional: copiar `apps/web/.env.example` a `apps/web/.env.local`. Incluye `PORTFOLIO_API_URL`, `SITE_URL`, hosts de imágenes y listas de URLs verificadas. No incluir credenciales de PostgreSQL en el frontend.
-
-## Iniciar la base de datos y el backend
-
-Requisitos adicionales: Docker Desktop con motor Linux y puerto local 55432 disponible.
+Requisitos adicionales: Docker Desktop con motor Linux y el puerto PostgreSQL local configurado, por defecto `55432`.
 
 ```powershell
 if (!(Test-Path .env)) { Copy-Item .env.example .env }
-# Editar .env: elegir una contraseña local propia y actualizar DATABASE_URL.
-# La contraseña dentro de DATABASE_URL debe estar codificada como URL.
+# Elegir credenciales locales y actualizar DATABASE_URL en .env.
 npm run db:up
 npm run db:validate
 npm run db:generate
@@ -90,71 +93,66 @@ npm run db:verify
 npm run api:dev
 ```
 
-Conservar cualquier `.env` existente. Los secretos, dependencias, cliente generado y artefactos de compilación están excluidos de Git. Los datos de PostgreSQL permanecen en un volumen de Docker y **no se guardan dentro del repositorio**; el esquema, las migraciones y el seed sí quedan versionados.
+La API responde en [http://127.0.0.1:3001/api/v1](http://127.0.0.1:3001/api/v1); Swagger está en `/api/v1/docs` durante desarrollo. Los listados de contenido usan `{ data, meta }` y los detalles `{ data }`.
 
-La API escucha por defecto en [http://127.0.0.1:3001/api/v1](http://127.0.0.1:3001/api/v1). Swagger está disponible en `/api/v1/docs` durante desarrollo y pruebas; se desactiva en producción.
-
-| Recurso | Rutas GET relativas a `/api/v1` |
+| Área | Rutas principales |
 | --- | --- |
-| Perfil | `/profile` |
-| Proyectos publicados | `/projects`, `/projects/:slug` |
-| Tecnologías | `/technologies`, `/technologies/:slug` |
-| Trayectoria | `/experience`, `/education`, `/certifications` |
-| Laboratorios publicados | `/security-labs`, `/security-labs/:slug` |
-| Salud del servicio | `/health`, `/health/ready` |
+| Contenido | `/profile`, `/projects`, `/technologies`, `/experience`, `/education`, `/certifications`, `/security-labs` |
+| Salud | `/health`, `/health/ready` |
+| Interacción | `/visitors`, `/community`, comentarios, respuestas, reacciones, reportes y medios |
+| Propietario | `/community-admin`, mediante credencial servidor a servidor |
 
-Los listados devuelven `{ data, meta }`; los detalles, `{ data }`. Los proyectos privados responden 404 incluso por slug. No existen rutas públicas de escritura ni formulario de contacto.
+Los proyectos privados de la API responden 404 en las rutas públicas. El seed conserva registros existentes y no publica automáticamente los proyectos de la base de datos.
 
-El seed añade 20 tecnologías y cinco proyectos sin publicar, sin reemplazar ediciones existentes. No inventa biografías, certificaciones, fechas ni despliegues. Por eso la API puede comenzar con proyectos públicos vacíos aunque la portada muestre la selección editorial de repositorios públicos.
+## Comunidad y panel del propietario
 
-## Validación y comandos útiles
+```powershell
+npm run community:configure
+```
+
+El asistente local prepara las variables necesarias; consultar [la guía de comunidad](docs/portfolio-community.md) antes de habilitarla. El panel está en `/admin/community`. No hay una cuenta administrativa predeterminada y el acceso permanece deshabilitado si falta su configuración.
+
+- El navegador pasa por las rutas BFF `/api/visitors`, `/api/community` y `/api/community-admin`.
+- Las claves del propietario y los secretos de firma permanecen en el servidor.
+- Las imágenes se validan, procesan y sirven con comprobaciones de acceso.
+- La moderación incluye aprobación, ocultación, eliminación recuperable, fijado, respuestas del propietario, reportes y bloqueo de participantes.
+- Los contadores representan navegadores, no personas verificadas.
+
+No versionar `.env`, archivos de datos, medios locales de usuarios ni credenciales. El esquema y las migraciones sí se incluyen. No eliminar volúmenes para solucionar incidencias de conexión.
+
+## Comprobaciones
 
 ```powershell
 npm run typecheck
-npm run lint
 npm run web:test
 npm run test:unit
+npm run api:build
 npm run web:build
 npm run web:test:e2e
 ```
 
-Las pruebas HTTP del frontend requieren el build y levantan sus propios servicios de prueba en los puertos 3101 y 4011; no necesitan PostgreSQL. Las pruebas de integración del backend sí necesitan la base local:
+Las pruebas HTTP de la web usan servicios de prueba en `3101` y `4011`; las pruebas de integración del backend requieren PostgreSQL. Para aislar las pruebas de comunidad de la base de trabajo:
 
 ```powershell
-npm run test:integration
+npm run community:test:isolated
 ```
 
-Última validación del frontend: compilación, TypeScript, ESLint, nueve pruebas de componentes/contratos y siete pruebas HTTP aprobadas. Se comprobó visualmente el diseño a 1440 y 390 px, la foto, las anclas y el menú móvil con cierre mediante Escape. La última ejecución de integración con PostgreSQL quedó pendiente por falta de conexión con Docker; no se considera validada de nuevo en este cierre.
+La revisión visual reciente incluye el navbar de escritorio, el menú móvil y el desplegable de servicios. Se comprobaron los límites del horario de Chile y sus diferencias de hora de verano/invierno. Los resultados de validación de la entrega se documentan en el pull request; no se consideran aprobadas las verificaciones que no hayan podido ejecutarse.
 
-Ante memoria limitada, la compilación se comprobó con:
+## Documentación y recursos
 
-```powershell
-$env:NODE_OPTIONS='--max-old-space-size=512 --max-semi-space-size=8'
-npm run web:build
-```
-
-Otros comandos: `npm run web:start`, `npm run api:build`, `npm run api:start`, `npm run db:status`, `npm run db:stop`. La prueba `db:verify-persistence` recrea solo el contenedor del proyecto conservando su volumen; interrumpe brevemente la base local.
-
-## Próxima sesión
-
-- Seguir puliendo diseño, textos y detalles responsive sobre esta versión aprobada.
-- Completar el contenido profesional de las secciones conectadas a la API.
-- Preparar y publicar los casos de estudio que se decida hacer públicos.
-- Volver a validar la integración con PostgreSQL cuando Docker esté disponible.
-- Preparar el despliegue cuando se defina el entorno de producción.
-
-## Documentación
-
-- [Frontend, configuración y fuentes de contenido](docs/frontend.md)
-- [Dirección visual y referencias](docs/design-research.md)
-- [Modelo de datos](docs/database.md)
+- [Frontend y fuentes de contenido](docs/frontend.md)
+- [Navbar y horario de atención](docs/navbar-design.md)
+- [Stack y banner](docs/technology-stack.md) · [Logos y licencias](docs/stack-assets.md)
+- [Trayectoria y medios profesionales](docs/career-media.md)
+- [Comunidad, seguridad y moderación](docs/portfolio-community.md)
 - [Operación y diagnóstico](docs/operations.md)
-- [Backend](docs/backend.md) y [validación](docs/backend-validation.md)
-- [Contrato de API REST](docs/public-api.md) y [validación](docs/public-api-validation.md)
-- [Validación inicial de base de datos](docs/validation.md)
+- [Modelo de datos](docs/database.md)
+- [Backend](docs/backend.md) · [Contrato de API](docs/public-api.md)
 
-## Diseño y contacto
+Los logos de tecnologías conservan sus marcas y atribuciones; los recursos de Devicon incluyen su licencia. La fotografía del banner del stack acredita a Maurits Bausenhart en Unsplash. Los recursos de marca de YB Veltrix Solutions y los datos profesionales fueron proporcionados por el propietario.
 
-Adaptación de estilo inspirada en [Blue Developer Portfolio, de ralphjay](https://www.figma.com/community/file/1693162938248147785), implementada con componentes y CSS propios. Foto del perfil de LinkedIn proporcionado por el propietario; imágenes de proyectos procedentes de sus repositorios públicos.
+---
 
-[GitHub](https://github.com/koyarxs) · [LinkedIn](https://www.linkedin.com/in/yerko-andr%C3%A9s-barrera-pantoja-a82821123/)
+**Yerko Barrera · YB Veltrix Solutions**
+Ingeniería de Software y Desarrollo Full Stack · Valparaíso, Chile.

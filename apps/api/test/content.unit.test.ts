@@ -1,3 +1,8 @@
+import sharp from 'sharp';
+import { sanitizeImage,MAX_IMAGE_BYTES } from '../src/community/community-media.service.ts';
+import { signVisitor,verifyVisitor } from '../../../packages/community/src/identity.ts';
+import { CommentDto, LikeDto } from '../src/community/community.module.ts';
+import { VisitDto, VisitorsService } from '../src/visitors/visitors.module.ts';
 import 'reflect-metadata';
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
@@ -73,5 +78,68 @@ describe('public query policy', () => {
     assert.deepEqual(args[3].where, { slug: 'private-lab', isPublished: true });
     assert.equal((args[0].select as Record<string, unknown>).email, undefined);
     assert.equal((args[3].select as Record<string, unknown>).findings, undefined);
+  });
+});
+
+
+describe('anonymous visitors', () => {
+  it('accepts only UUID v4 visitor identifiers', async () => {
+    assert.deepEqual(await validate(plainToInstance(VisitDto, { id: 'ef2479de-647f-4484-b370-9607647c16f0' })), []);
+    for (const id of ['', '127.0.0.1', 'person@example.com', 'not-an-id']) {
+      assert.ok((await validate(plainToInstance(VisitDto, { id }))).length > 0);
+    }
+  });
+  it('reports unavailable statistics instead of fabricating a count', async () => {
+    const service = new VisitorsService({ client: { $transaction: async () => { throw new Error('private connection detail'); } } } as unknown as PrismaService);
+    await assert.rejects(() => service.record('ef2479de-647f-4484-b370-9607647c16f0'), error => error instanceof Error && error.message === 'Visitor statistics unavailable');
+  });
+});
+
+
+describe('community validation', () => {
+  const valid = { name:'  Visitante  ', avatar:'🚀', category:'Opinión general', message:'  Una buena idea para el portafolio.  ',attachmentIds:[] };
+  it('trims text and rejects project targeting, invalid categories, attachments and likes', async () => {
+    const dto = plainToInstance(CommentDto,valid);
+    assert.deepEqual(await validate(dto),[]);
+    assert.equal(dto.name,'Visitante');
+    assert.equal(dto.message,'Una buena idea para el portafolio.');
+    for (const patch of [{ name:' ' },{ name:'x'.repeat(61) },{ avatar:'unknown' },{ category:'Pawly' },{ message:' ' },{ message:'x'.repeat(2001) },{ attachmentIds:['invalid'] },{ attachmentIds:Array(4).fill('ef2479de-647f-4484-b370-9607647c16f0') }]) assert.ok((await validate(plainToInstance(CommentDto,{ ...valid,...patch }))).length > 0);
+    assert.ok((await validate(plainToInstance(LikeDto,{ liked:'true' }))).length > 0);
+    assert.deepEqual(await validate(plainToInstance(LikeDto,{ liked:false })),[]);
+  });
+});
+
+describe('signed visitor identity', () => {
+  const key = 'test-signing-key-that-is-longer-than-forty-eight-characters';
+  const id = 'ef2479de-647f-4484-b370-9607647c16f0';
+  it('rejects unsigned, forged, expired and future tokens', () => {
+    const now = 1794772800000;
+    const token = signVisitor(id,key,now);
+    assert.equal(verifyVisitor(token,key,300,now),id);
+    assert.equal(verifyVisitor(id,key,300,now),null);
+    assert.equal(verifyVisitor(token+'x',key,300,now),null);
+    assert.equal(verifyVisitor(token,key,300,now+301000),null);
+    assert.equal(verifyVisitor(token,key,300,now-31000),null);
+    assert.equal(verifyVisitor(token,'incorrect-key',300,now),null);
+  });
+});
+describe('image validation and metadata removal', () => {
+  it('accepts PNG, JPEG and WebP and always outputs metadata-free WebP', async () => {
+    for (const [format,mimetype] of [['png','image/png'],['jpeg','image/jpeg'],['webp','image/webp']] as const) {
+      const buffer = await sharp({ create:{ width:12,height:10,channels:3,background:'#245f9e' } }).withExif({ IFD0:{ Artist:'Private fixture author' } })[format]().toBuffer();
+      const clean = await sanitizeImage({ buffer,mimetype,size:buffer.length });
+      const meta = await sharp(clean.buffer).metadata();
+      assert.equal(meta.format,'webp'); assert.equal(meta.exif,undefined); assert.equal(meta.xmp,undefined); assert.equal(meta.width,12);
+    }
+  });
+  it('rejects oversized, deceptive, truncated and unsupported files', async () => {
+    for (const file of [
+      { buffer:Buffer.from('<svg xmlns="http://www.w3.org/2000/svg"/>'),mimetype:'image/png',size:50 },
+      { buffer:Buffer.from([137,80,78,71,13,10,26,10]),mimetype:'image/png',size:8 },
+      { buffer:Buffer.alloc(MAX_IMAGE_BYTES+1),mimetype:'image/jpeg',size:MAX_IMAGE_BYTES+1 },
+      { buffer:Buffer.from('test'),mimetype:'text/html',size:4 },
+    ]) await assert.rejects(() => sanitizeImage(file));
+    const png = await sharp({ create:{ width:1,height:1,channels:3,background:'#fff' } }).png().toBuffer();
+    await assert.rejects(() => sanitizeImage({ buffer:png,mimetype:'image/jpeg',size:png.length }));
   });
 });

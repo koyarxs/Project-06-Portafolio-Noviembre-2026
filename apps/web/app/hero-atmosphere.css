@@ -1,0 +1,32 @@
+/* Sculpted blue satin: icy light, cobalt folds and a midnight-blue outer edge. */
+.orbit-hero { background:radial-gradient(ellipse at 73% 38%,#337ee8 0,transparent 57%),radial-gradient(ellipse at 12% 88%,#1979da 0,transparent 53%),linear-gradient(125deg,#1757b4,#1d65ce 52%,#184da7); }
+.orbit-hero::before { display:none; }
+.orbit-hero::after { display:none; }
+.orbit-hero .aurora { opacity:.04; }
+.orbit-hero .digital-fireworks { opacity:.08; }
+.hero-ecosystem .stack-network { opacity:.35; }
+.site-header { background:linear-gradient(110deg,#fffffff7 25%,#f5f9fff5 70%,#dcecffed); border-top-color:#a9cdf2; border-bottom:1px solid #dce9f77a; }
+.site-header .veltrix-reference-logo { mix-blend-mode:multiply; }
+.hero-ecosystem .orbit-caption-row .orbit-caption { background:#ffffff8c; border-color:#ffffffb3; }
+.hero-ecosystem .orbit-tech strong { background:none; border-radius:6px; padding:2px 5px; color:#f1f7ff; }
+.hero-ecosystem .orbit-logo { filter:drop-shadow(0 3px 7px #193d6920); }
+.hero-composition .hero-greeting .typewriter-text,.hero-composition .typewriter-text.code-keyword,.hero-composition .typewriter-text.code-function { color:#e1efff; }
+.hero-composition .typewriter-text.code-string,.hero-composition .typewriter-text.code-type { color:#d4e9ff; }
+.hero-composition .typewriter-text.code-comment { color:#c5ddf8; }
+.hero-composition h1 em .typewriter-text.code-string { color:#fff; -webkit-text-stroke:.6px #122e55; text-shadow:0 2px 5px #06316a30; }
+.hero-composition .hero-degree,.hero-composition .hero-degree>span { color:#d5e7ff; }
+.hero-action-primary { background:#fff; color:#1853a2; border-color:#fff; box-shadow:0 5px 18px #082d6b25; }
+.hero-action-secondary { background:#ffffff12; color:#fff; border-color:#b9d8ff75; box-shadow:none; }
+.hero-action-secondary:hover { background:#ffffff26; }
+.hero-action-contact { color:#e1eeff; }
+.hero-actions a:focus-visible { outline-color:#fff; }
+.hero-ecosystem .orbit-caption-row .orbit-caption { background:#ffffff0d; border-color:#ffffff30; color:#deecff; }
+.hero-ecosystem .orbit-caption>span { color:#c3e4ff; }
+.hero-ecosystem .network-line { stroke:#d1e6ff; stroke-opacity:.35; }
+.hero-ecosystem .network-pulse { stroke:#b3dcff; }
+.hero-ecosystem .orbit-backdrop { -webkit-text-stroke-color:#d9ecff26; }
+.developer-avatar svg>ellipse { opacity:.2; }
+@media(max-width:760px) {
+  .orbit-hero .digital-fireworks { opacity:.05; }
+}
+@media(prefers-reduced-motion:reduce) { .orbit-hero .digital-fireworks { display:none; } }
