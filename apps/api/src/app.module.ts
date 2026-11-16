@@ -1,7 +1,10 @@
+import { CommunityThrottlerGuard } from './community/community-auth.ts';
+import { CommunityModule } from './community/community.module.ts';
+import { VisitorsModule } from './visitors/visitors.module.ts';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
-import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { ThrottlerModule } from '@nestjs/throttler';
 import { environmentFiles, validateEnvironment } from './config/environment.ts';
 import { HealthModule } from './health/health.module.ts';
 import { ProfileModule } from './profile/profile.module.ts';
@@ -18,10 +21,10 @@ import { SecurityLabsModule } from './security-labs/security-labs.module.ts';
     ThrottlerModule.forRootAsync({ inject: [ConfigService], useFactory: (config: ConfigService) => [
       { ttl: 60_000, limit: config.getOrThrow<number>('API_RATE_LIMIT') },
     ] }),
-    HealthModule,
+    HealthModule, VisitorsModule, CommunityModule,
     ProfileModule, ProjectsModule, TechnologiesModule, ExperienceModule,
     EducationModule, CertificationsModule, SecurityLabsModule,
   ],
-  providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
+  providers: [{ provide: APP_GUARD, useClass: CommunityThrottlerGuard }],
 })
 export class AppModule {}

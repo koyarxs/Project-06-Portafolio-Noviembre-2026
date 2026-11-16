@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none">
+  <defs>
+    <linearGradient id="paper" x2="1600" y2="1000" gradientUnits="userSpaceOnUse"><stop stop-color="#f5f9ff"/><stop offset=".55" stop-color="#eef5ff"/><stop offset="1" stop-color="#fff"/></linearGradient>
+    <radialGradient id="blue"><stop stop-color="#71adf4" stop-opacity=".3"/><stop offset="1" stop-color="#9cc8ff" stop-opacity="0"/></radialGradient>
+    <radialGradient id="ice"><stop stop-color="#8ce1ed" stop-opacity=".22"/><stop offset="1" stop-color="#aff1f6" stop-opacity="0"/></radialGradient>
+    <linearGradient id="ribbon" x1="950" y1="120" x2="1400" y2="870" gradientUnits="userSpaceOnUse"><stop stop-color="#a5d9fc" stop-opacity="0"/><stop offset=".48" stop-color="#6aa7ea" stop-opacity=".19"/><stop offset="1" stop-color="#a5c6f9" stop-opacity="0"/></linearGradient>
+    <linearGradient id="line" x1="200" x2="1500" gradientUnits="userSpaceOnUse"><stop stop-color="#8cb6e8" stop-opacity="0"/><stop offset=".65" stop-color="#6f9dd7" stop-opacity=".25"/><stop offset="1" stop-color="#8cb6e8" stop-opacity="0"/></linearGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0v48" stroke="#5785bd" stroke-opacity=".045"/><circle cx="0" cy="0" r="1" fill="#6698d2" fill-opacity=".13"/></pattern>
+    <radialGradient id="grid-mask"><stop stop-color="#fff"/><stop offset="1" stop-color="#000"/></radialGradient>
+    <mask id="fade"><ellipse cx="1150" cy="480" rx="650" ry="600" fill="url(#grid-mask)"/></mask>
+  </defs>
+  <path fill="url(#paper)" d="M0 0h1600v1000H0z"/>
+  <ellipse cx="1270" cy="320" rx="660" ry="550" fill="url(#blue)"/>
+  <ellipse cx="220" cy="760" rx="640" ry="430" fill="url(#ice)"/>
+  <path d="M1060-160c-280 280-240 340 70 500s140 310-130 490" stroke="url(#ribbon)" stroke-width="190"/>
+  <path d="M1180-100c-210 240-180 330 80 490s90 310-120 460" stroke="#fff" stroke-opacity=".42" stroke-width="70"/>
+  <path fill="url(#grid)" mask="url(#fade)" d="M0 0h1600v1000H0z"/>
+  <g stroke="url(#line)" stroke-width="1">
+    <path d="M-100 880c360-250 580 30 880-110s410-190 920-30"/>
+    <path d="M-100 893c360-250 580 30 880-110s410-190 920-30"/>
+    <path d="M-100 906c360-250 580 30 880-110s410-190 920-30"/>
+    <path d="M-100 919c360-250 580 30 880-110s410-190 920-30"/>
+    <path d="M-100 932c360-250 580 30 880-110s410-190 920-30"/>
+    <path d="M-100 945c360-250 580 30 880-110s410-190 920-30"/>
+    <path d="M-100 958c360-250 580 30 880-110s410-190 920-30"/>
+  </g>
+  <g stroke="#79a5d8" stroke-opacity=".19" stroke-width="1.2">
+    <path d="M1440 0v94l-70 70v140l90 90h140M1600 220h-83l-57 57v190l-80 80v93"/>
+    <path d="M1510 0v116l-50 50v100M0 650h70l40 40v60l65 65h110"/>
+    <circle cx="1380" cy="640" r="4" fill="#f7fbff"/><circle cx="1460" cy="266" r="3" fill="#f7fbff"/><circle cx="285" cy="815" r="3" fill="#f7fbff"/>
+  </g>
+  <g fill="#538fce" fill-opacity=".2"><circle cx="1307" cy="124" r="2"/><circle cx="1480" cy="567" r="2"/><circle cx="155" cy="590" r="2"/><circle cx="1030" cy="860" r="2"/></g>
+</svg>

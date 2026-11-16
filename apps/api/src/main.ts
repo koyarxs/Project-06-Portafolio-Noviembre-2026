@@ -6,7 +6,8 @@ import type { NestExpressApplication } from '@nestjs/platform-express';
 import { configureApp } from './configure-app.ts';
 import type { Environment } from './config/environment.ts';
 
-const logger = new ConsoleLogger({ json: true, colors: false,
+const production = process.env.NODE_ENV === 'production';
+const logger = new ConsoleLogger({ json: production, colors: !production,
   logLevels: process.env.NODE_ENV === 'production' ? ['log', 'warn', 'error'] : ['log', 'warn', 'error', 'debug'],
 });
 let app: NestExpressApplication | undefined;

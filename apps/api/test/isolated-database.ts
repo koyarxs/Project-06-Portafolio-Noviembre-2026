@@ -40,6 +40,9 @@ export async function createIsolatedDatabase(connectionString: string) {
     await admin.query(`CREATE SCHEMA "${schema}"`);
     await admin.query(`SET search_path TO "${schema}"`);
     await admin.query(migration);
+    await admin.query(await readFile(resolve('../../prisma/migrations/20261115000000_portfolio_visitors/migration.sql'), 'utf8'));
+    await admin.query(await readFile(resolve('../../prisma/migrations/20261115010000_portfolio_community/migration.sql'), 'utf8'));
+    await admin.query(await readFile(resolve('../../prisma/migrations/20261115020000_advanced_community/migration.sql'), 'utf8'));
     return { db, connectionString: url.href, close };
   } catch (error) { await close(); throw error; }
 }

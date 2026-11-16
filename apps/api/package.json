@@ -9,7 +9,8 @@
     "dev": "tsc-watch -p tsconfig.build.json --onSuccess \"node ../../dist/apps/api/src/main.js\"",
     "start": "node ../../dist/apps/api/src/main.js",
     "test:unit": "tsc -p tsconfig.test.json && node --test ../../dist/test/apps/api/test/unit.test.js ../../dist/test/apps/api/test/content.unit.test.js",
-    "test:integration": "tsc -p tsconfig.test.json && node --test ../../dist/test/apps/api/test/integration.test.js ../../dist/test/apps/api/test/content.integration.test.js"
+    "test:integration": "tsc -p tsconfig.test.json && node --test ../../dist/test/apps/api/test/integration.test.js ../../dist/test/apps/api/test/content.integration.test.js ../../dist/test/apps/api/test/community.integration.test.js",
+    "start:dev": "npm run dev"
   },
   "dependencies": {
     "@nestjs/common": "12.4.2",
@@ -22,7 +23,8 @@
     "class-validator": "0.15.1",
     "helmet": "8.3.0",
     "reflect-metadata": "0.2.2",
-    "rxjs": "7.8.2"
+    "rxjs": "7.8.2",
+    "sharp": "0.35.5"
   },
   "devDependencies": {
     "@nestjs/testing": "12.4.2",

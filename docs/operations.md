@@ -36,6 +36,25 @@ El usuario creado por la imagen oficial es superusuario local. No es una configu
 
 ## Diagnóstico
 
+### Arranque desde PowerShell en Windows
+
+Si PowerShell bloquea `npm.ps1` con `PSSecurityException`, usar `npm.cmd` sin cambiar la política de ejecución del equipo:
+
+```powershell
+# Iniciar Docker Desktop y esperar a que el motor esté disponible.
+npm.cmd run db:up
+npm.cmd run api:dev
+```
+
+Mantener una sola terminal con `api:dev`. Si aparece `EADDRINUSE` en el puerto 3001, comprobar primero la instancia existente:
+
+```powershell
+curl.exe http://127.0.0.1:3001/api/v1/health
+curl.exe http://127.0.0.1:3001/api/v1/health/ready
+```
+
+`health` confirma que NestJS responde; `health/ready` comprueba además PostgreSQL. Un 200 en el primero y un 503 en el segundo puede indicar que Docker o la base están detenidos. Iniciar Docker Desktop y ejecutar `npm.cmd run db:up`; la API puede recuperar la conexión sin reiniciarse. Swagger está en `http://127.0.0.1:3001/api/v1/docs`.
+
 - Motor inaccesible: iniciar Docker Desktop y verificar que está habilitado el motor Linux. En entornos aislados puede requerirse autorización para acceder a la tubería Docker.
 - Puerto ocupado: elegir otro POSTGRES_PORT, actualizar DATABASE_URL y recrear únicamente el servicio de este proyecto.
 - Error de autenticación: comprobar correspondencia de `.env` con la inicialización del volumen; no imprimir contraseñas en logs compartidos.

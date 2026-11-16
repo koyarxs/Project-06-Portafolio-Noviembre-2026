@@ -8,6 +8,10 @@ export interface Environment {
   CORS_ORIGINS: string[];
   DATABASE_URL: string;
   API_RATE_LIMIT: number;
+  COMMUNITY_SIGNING_SECRET?: string;
+  COMMUNITY_ADMIN_TOKEN?: string;
+  COMMUNITY_UPLOAD_DIR: string;
+  COMMUNITY_REQUIRE_APPROVAL: boolean;
 }
 
 export function validateEnvironment(input: Record<string, unknown>): Environment {
@@ -44,7 +48,15 @@ export function validateEnvironment(input: Record<string, unknown>): Environment
         url.username !== '' || url.password !== '' || (mode === 'production' && url.protocol !== 'https:');
     })) throw new Error();
   } catch { throw new Error('Invalid configuration: CORS_ORIGINS'); }
+  for (const key of ['COMMUNITY_SIGNING_SECRET','COMMUNITY_ADMIN_TOKEN']) {
+    if (input[key] !== undefined && String(input[key]).length < 48) throw new Error(`Invalid configuration: ${key}`);
+  }
+  if (input.COMMUNITY_REQUIRE_APPROVAL !== undefined && !['true','false'].includes(String(input.COMMUNITY_REQUIRE_APPROVAL))) throw new Error('Invalid configuration: COMMUNITY_REQUIRE_APPROVAL');
   return {
+    COMMUNITY_SIGNING_SECRET: input.COMMUNITY_SIGNING_SECRET as string | undefined,
+    COMMUNITY_ADMIN_TOKEN: input.COMMUNITY_ADMIN_TOKEN as string | undefined,
+    COMMUNITY_UPLOAD_DIR: String(input.COMMUNITY_UPLOAD_DIR ?? join(dirname(environmentFiles()[0]), '.data', 'community')),
+    COMMUNITY_REQUIRE_APPROVAL: input.COMMUNITY_REQUIRE_APPROVAL === 'true',
     NODE_ENV: mode as Environment['NODE_ENV'], API_HOST: String(host), API_PORT: port,
     CORS_ORIGINS: [...new Set(origins)], DATABASE_URL: database, API_RATE_LIMIT: rateLimit,
   };

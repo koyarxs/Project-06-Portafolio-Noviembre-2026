@@ -129,6 +129,7 @@ model Technology {
 }
 
 model Project {
+  communityComments PortfolioComment[]
   id                  String              @id @default(uuid()) @db.Uuid
   name                String              @db.VarChar(160)
   slug                String              @unique @db.VarChar(180)
@@ -271,4 +272,101 @@ model ContactMessage {
   updatedAt   DateTime             @updatedAt @db.Timestamptz(3)
 
   @@index([status, createdAt])
+}
+
+// Anonymous browser identifier only; no IP, location or personal profile.
+model PortfolioVisitor {
+  blockedAt DateTime? @db.Timestamptz(3)
+  comments PortfolioComment[]
+  attachments CommentAttachment[]
+  reactions CommunityReaction[]
+  reports CommentReport[]
+  like PortfolioLike?
+  id        String   @id @db.Uuid
+  firstSeen DateTime @default(now()) @db.Timestamptz(3)
+  lastSeen  DateTime @default(now()) @db.Timestamptz(3)
+
+  @@index([firstSeen])
+  @@index([lastSeen])
+}
+
+model PortfolioLike {
+  visitor PortfolioVisitor @relation(fields: [visitorId], references: [id], onDelete: Cascade)
+  visitorId String @id @db.Uuid
+  liked Boolean @default(true)
+}
+model PortfolioComment {
+  visitor PortfolioVisitor @relation(fields: [visitorId], references: [id], onDelete: Restrict)
+  scope String @default("portfolio") @db.VarChar(20)
+  projectId String? @db.Uuid
+  project Project? @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  category String? @db.VarChar(40)
+  parentId String? @db.Uuid
+  parent PortfolioComment? @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Restrict)
+  replies PortfolioComment[] @relation("CommentReplies")
+  status String @default("APPROVED") @db.VarChar(12)
+  authorRole String @default("VISITOR") @db.VarChar(10)
+  pinned Boolean @default(false)
+  attachments CommentAttachment[]
+  reactions CommunityReaction[]
+  reports CommentReport[]
+  @@index([scope, status, parentId, createdAt])
+  id String @id @default(uuid()) @db.Uuid
+  visitorId String @db.Uuid
+  name String @db.VarChar(60)
+  avatar String @db.VarChar(16)
+  topic String @db.VarChar(80)
+  message String @db.VarChar(2000)
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+
+  @@index([createdAt, id])
+  @@index([visitorId, createdAt])
+}
+
+model CommentAttachment {
+  id String @id @default(uuid()) @db.Uuid
+  visitorId String @db.Uuid
+  visitor PortfolioVisitor @relation(fields: [visitorId], references: [id], onDelete: Cascade)
+  commentId String? @db.Uuid
+  comment PortfolioComment? @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  storageKey String @unique @db.VarChar(50)
+  width Int
+  height Int
+  bytes Int
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  @@index([visitorId, commentId, createdAt])
+}
+model CommunityReaction {
+  id String @id @default(uuid()) @db.Uuid
+  visitorId String @db.Uuid
+  visitor PortfolioVisitor @relation(fields: [visitorId], references: [id], onDelete: Cascade)
+  targetKey String @db.VarChar(80)
+  commentId String? @db.Uuid
+  comment PortfolioComment? @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  emoji String @db.VarChar(16)
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  @@unique([visitorId, targetKey])
+  @@index([targetKey, emoji])
+}
+model CommentReport {
+  id String @id @default(uuid()) @db.Uuid
+  visitorId String @db.Uuid
+  visitor PortfolioVisitor @relation(fields: [visitorId], references: [id], onDelete: Cascade)
+  commentId String @db.Uuid
+  comment PortfolioComment @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  reason String @db.VarChar(20)
+  detail String? @db.VarChar(500)
+  status String @default("OPEN") @db.VarChar(12)
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  @@unique([visitorId, commentId])
+  @@index([status, createdAt])
+}
+model ModerationAction {
+  id String @id @default(uuid()) @db.Uuid
+  action String @db.VarChar(20)
+  commentId String? @db.Uuid
+  participantId String? @db.Uuid
+  actor String @default("OWNER") @db.VarChar(20)
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  @@index([createdAt])
 }
