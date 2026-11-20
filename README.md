@@ -152,6 +152,7 @@ Las capturas de esta versión se tomaron en Chrome con el portafolio ejecutándo
 
 ## Documentación y recursos
 
+- [Despliegue del frontend con Cloudflare Workers y GitHub](docs/cloudflare.md)
 - [Frontend y fuentes de contenido](docs/frontend.md)
 - [Navbar y horario de atención](docs/navbar-design.md)
 - [Stack y banner](docs/technology-stack.md) · [Logos y licencias](docs/stack-assets.md)

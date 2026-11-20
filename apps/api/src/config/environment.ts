@@ -19,7 +19,7 @@ export function validateEnvironment(input: Record<string, unknown>): Environment
   if (!['development', 'test', 'production'].includes(String(mode))) {
     throw new Error('Invalid configuration: NODE_ENV');
   }
-  const rawPort = input.API_PORT ?? '3001';
+  const rawPort = input.API_PORT ?? input.PORT ?? '3001';
   const port = Number(rawPort);
   if (!/^\d+$/.test(String(rawPort)) || !Number.isInteger(port) || port < 1 || port > 65535) {
     throw new Error('Invalid configuration: API_PORT');

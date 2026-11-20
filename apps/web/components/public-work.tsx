@@ -155,7 +155,9 @@ function projectTitle(project: Project) {
 }
 
 function ProjectLogo({ slug }: { slug: FeaturedSlug }) {
-  return <Image className={styles.projectLogo} src={projectLogos[slug]} alt="" width={78} height={42} unoptimized />;
+  return <span className={styles.projectLogo}>
+    <Image src={projectLogos[slug]} alt="" fill sizes="78px" unoptimized />
+  </span>;
 }
 
 function ProjectKind({ kind }: { kind: string }) {

@@ -11,6 +11,9 @@
     "packages/*"
   ],
   "overrides": {
+    "@prisma/config": {
+      "effect": "3.22.1"
+    },
     "minimatch": "11.0.1"
   },
   "scripts": {

@@ -10,6 +10,7 @@ const config: NextConfig = {
   experimental: { cpus: 1 },
   turbopack: { root: fileURLToPath(new URL('../..', import.meta.url)) },
   images: {
+    unoptimized: process.env.PORTFOLIO_WORKER_BUILD === '1',
     remotePatterns: hosts.map(hostname => ({ protocol: 'https' as const, hostname, pathname: '/**' })),
     dangerouslyAllowSVG: false,
     maximumRedirects: 0,

@@ -15,6 +15,8 @@ describe('environment validation', () => {
     assert.equal(config.API_HOST, '127.0.0.1');
     assert.deepEqual(config.CORS_ORIGINS, ['http://localhost:3000']);
     assert.equal(validateEnvironment({ ...base, API_PORT: '4000' }).API_PORT, 4000);
+    assert.equal(validateEnvironment({ ...base, PORT: '8080' }).API_PORT, 8080);
+    assert.equal(validateEnvironment({ ...base, API_PORT: '4000', PORT: '8080' }).API_PORT, 4000);
     assert.deepEqual(validateEnvironment({ ...base, CORS_ORIGINS: 'https://example.com, https://other.example' }).CORS_ORIGINS,
       ['https://example.com', 'https://other.example']);
   });

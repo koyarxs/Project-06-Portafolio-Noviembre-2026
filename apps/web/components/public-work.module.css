@@ -157,7 +157,8 @@
 .diagram strong { font-size:clamp(.82rem,1.2vw,1rem); font-weight:650; }
 .body { display:flex; flex-direction:column; flex:1; padding:15px 0 8px; }
 .titleRow { display:grid; grid-template-columns:65px minmax(0,1fr); align-items:start; gap:9px; min-height:69px; margin-bottom:7px; }
-.projectLogo { display:block; width:100%; max-width:78px; height:42px; object-fit:contain; }
+.projectLogo { position:relative; display:block; width:100%; max-width:78px; height:42px; }
+.projectLogo img { object-fit:contain; }
 .titleRow h3 { margin:0; color:#1f3550; font-size:1.2rem; line-height:1.3; letter-spacing:-.035em; font-weight:740; }
 .kind { display:flex; align-items:center; gap:6px; margin-top:4px; color:#395878; font-size:.69rem; line-height:1.35; }
 .kind svg,.kind img { flex:none; width:17px; height:17px; object-fit:contain; }
