@@ -4,37 +4,48 @@ Portafolio profesional de **Yerko Andrés Barrera Pantoja**, Ingeniero en Comput
 
 [GitHub](https://github.com/koyarxs) · [LinkedIn](https://www.linkedin.com/in/yerko-andr%C3%A9s-barrera-pantoja-a82821123/) · [Documentación del frontend](docs/frontend.md)
 
-![Portada y navegación de YB Veltrix Solutions](docs/images/navbar-premium-desktop.jpg)
+![Portada y navegación de YB Veltrix Solutions](docs/images/actual-inicio.jpg)
 
 ## Estado actual
 
-Actualizado el **16 de noviembre de 2026**. Desarrollo local; este repositorio no acredita un despliegue de producción. El frontend editorial puede consultarse sin backend; las funciones de comunidad, visitas y administración requieren la API, PostgreSQL y su configuración.
+Actualizado el **20 de noviembre de 2026**. Desarrollo local; este repositorio no acredita un despliegue de producción. El frontend editorial puede consultarse sin backend; las funciones de comunidad, visitas y administración requieren la API, PostgreSQL y su configuración.
 
-## Novedades de esta versión
+## Secciones del portafolio
 
-- **Navegación en tres niveles:** barra de servicios y atención, logo original centrado y menú de navegación. Incluye servicios desplegables y menú móvil.
-- **Horario de atención:** lunes a viernes de 08:00 a 20:00, zona `America/Santiago`. El indicador se actualiza según el horario; no representa presencia en línea.
-- **Portada animada:** fotografía personal, avatar, escritura progresiva, tecnologías y efectos visuales, con consideración de movimiento reducido.
-- **Galería de proyectos:** banner propio, capturas en composiciones de monitor, tablet y celular, enlaces de GitHub, acceso al sitio de FlyMaster y reverso de tarjetas con la marca Veltrix.
-- **Stack organizado:** Frontend, Backend y Bases de datos; Herramientas y Cloud; Testing, DevOps y Seguridad. Logos, descripciones breves, banners por categoría, circuitos luminosos y recorrido azul/blanco en las tarjetas.
-- **Perfil y trayectoria:** formación, experiencia profesional, actividad de YB Veltrix Solutions, certificaciones y enlaces a documentos.
-- **Footer renovado:** logo real, contacto, navegación, servicios y perfiles profesionales.
-- **Comunidad:** comentarios, respuestas, reacciones, categorías, adjuntos de imágenes, reportes, orden y paginación.
-- **Visitas y moderación:** identidad anónima firmada, contadores persistentes y panel del propietario con gestión de comentarios, reportes y participantes.
+- **Inicio y navegación** con portada animada, avatar, carrusel de tecnologías, accesos de visitante y un pie de página con contacto y navegación.
+- **Proyectos** con filtros en la portada y fichas individuales. Las fichas reúnen descripción, capturas, tecnologías y videos cuando están disponibles.
+- **Perfil, trayectoria y servicios** con la experiencia profesional, títulos, cursos, certificaciones y áreas de trabajo de YB Veltrix Solutions.
+- **Preguntas frecuentes y Asistente Veltrix** con respuestas sobre proyectos, servicios, tecnologías y contacto. El chat puede usar el modelo local del navegador para reconocer consultas cuando está disponible y admite un enlace opcional de atención humana mediante `TAWK_DIRECT_CHAT_URL`.
+- **Visitas y Me gusta** con contadores persistentes en la barra lateral. La API de comunidad conserva comentarios, respuestas, reacciones, adjuntos, reportes y moderación.
 
-Las composiciones de dispositivos reutilizan capturas de escritorio; no son capturas móviles independientes. FraudShield conserva un esquema técnico porque no hay una captura de interfaz disponible. Los usos de AWS, Azure y Google Cloud se presentan como previstos para proyectos y laboratorios.
+## Capturas de la versión actual
+
+| Sección | Vista |
+| --- | --- |
+| Carrusel de tecnologías | ![Carrusel de tecnologías](docs/images/actual-carrusel.jpg) |
+| Stack tecnológico | ![Stack tecnológico](docs/images/actual-stack.jpg) |
+| Galería de proyectos | ![Galería de proyectos destacados](docs/images/actual-proyectos.jpg) |
+| Sobre mí | ![Página Sobre mí](docs/images/actual-sobre-mi.jpg) |
+| Trayectoria | ![Página Trayectoria](docs/images/actual-trayectoria.jpg) |
+| Servicios | ![Página de servicios](docs/images/actual-servicios.jpg) |
+| Preguntas frecuentes | ![Preguntas frecuentes](docs/images/actual-preguntas.jpg) |
+| Asistente Veltrix | ![Asistente Veltrix abierto](docs/images/actual-asistente.jpg) |
+| Pie de página | ![Pie de página de Veltrix](docs/images/actual-footer.jpg) |
+
+[Ver portada móvil](docs/images/actual-movil.jpg)
 
 ## Proyectos destacados
 
-| Proyecto | Qué muestra | Tecnologías principales | Enlaces |
+| Proyecto | Qué muestra | Tecnologías principales | Enlaces y captura |
 | --- | --- | --- | --- |
-| **Pawly** | Sitio y sistema veterinario; demo en desarrollo | Next.js · NestJS · PostgreSQL | [Repositorio](https://github.com/koyarxs/Project-03-Pawly-Octubre-2026) |
-| **Zenvik** | Gestión de equipos, turnos y permisos; MVP local | React · Next.js · TypeScript · Python · Django REST · PostgreSQL | [Repositorio](https://github.com/koyarxs/Project-05-Zenvik-Octubre-2026) |
-| **FraudShield** | Análisis de transacciones CSV y clasificación de riesgo; proyecto de título | Next.js · NestJS · Prisma | [Repositorio](https://github.com/koyarxs/Project-01-FraudShield-Septiembre-2026) |
-| **Falta Uno** | Plataforma deportiva colaborativa con Jean Paul Gómez; en desarrollo | Angular · NestJS · PostgreSQL | [Repositorio](https://github.com/koyarxs/Project-04-Sistema-Deporte-Octubre-2026) |
-| **FlyMaster** | Sitio de servicios con drones y formación para pilotos | Next.js · React · NestJS · PostgreSQL | [Sitio](https://flymaster.cl) · [Repositorio privado](https://github.com/koyarxs/Project-02-FlyMaster-Octubre-2026) |
+| **Pawly** | Sitio y sistema veterinario; demo en desarrollo | Next.js · NestJS · PostgreSQL | [Repositorio](https://github.com/koyarxs/Project-03-Pawly-Octubre-2026) · [Captura](docs/images/actual-pawly.jpg) |
+| **Zenvik** | Gestión de equipos, turnos y permisos; MVP local | React · Next.js · TypeScript · Python · Django REST · PostgreSQL | [Repositorio](https://github.com/koyarxs/Project-05-Zenvik-Octubre-2026) · [Captura](docs/images/actual-zenvik.jpg) |
+| **FraudShield** | Análisis de transacciones CSV y clasificación de riesgo; proyecto de título | Next.js · NestJS · Prisma | [Repositorio](https://github.com/koyarxs/Project-01-FraudShield-Septiembre-2026) · [Captura](docs/images/actual-fraudshield.jpg) |
+| **Falta Uno** | Plataforma deportiva colaborativa con Jean Paul Gómez; en desarrollo | Angular · NestJS · PostgreSQL | [Repositorio](https://github.com/koyarxs/Project-04-Sistema-Deporte-Octubre-2026) · [Captura](docs/images/actual-falta-uno.jpg) |
+| **FlyMaster** | Sitio de servicios con drones y formación para pilotos | Next.js · React · NestJS · PostgreSQL | [Sitio](https://flymaster.cl) · [Repositorio privado](https://github.com/koyarxs/Project-02-FlyMaster-Octubre-2026) · [Captura](docs/images/actual-flymaster.jpg) |
+| **Portafolio profesional** | Sitio de YB Veltrix Solutions, con comunidad y panel de moderación | Next.js · NestJS · PostgreSQL | [Captura](docs/images/actual-portafolio.jpg) |
 
-El enlace al repositorio privado de FlyMaster requiere autorización; no se publica su código en este portafolio. Los proyectos destacados se mantienen en `apps/web/lib/owner.ts`, independientes de los proyectos privados de la API.
+El enlace al repositorio privado de FlyMaster requiere autorización; no se publica su código en este portafolio. Los destacados editoriales se publican en `/proyectos/destacados/[slug]`. Sus datos y fichas se mantienen en `apps/web/lib/owner.ts`, `apps/web/lib/featured-project-stories.ts` y `apps/web/components/public-work.tsx`. El catálogo conectado a la API se consulta en `/proyectos`.
 
 ## Arquitectura y stack del repositorio
 
@@ -116,7 +127,7 @@ El asistente local prepara las variables necesarias; consultar [la guía de comu
 - Las claves del propietario y los secretos de firma permanecen en el servidor.
 - Las imágenes se validan, procesan y sirven con comprobaciones de acceso.
 - La moderación incluye aprobación, ocultación, eliminación recuperable, fijado, respuestas del propietario, reportes y bloqueo de participantes.
-- Los contadores representan navegadores, no personas verificadas.
+- La portada muestra visitas y Me gusta. Los contadores representan navegadores.
 
 No versionar `.env`, archivos de datos, medios locales de usuarios ni credenciales. El esquema y las migraciones sí se incluyen. No eliminar volúmenes para solucionar incidencias de conexión.
 
@@ -137,7 +148,7 @@ Las pruebas HTTP de la web usan servicios de prueba en `3101` y `4011`; las prue
 npm run community:test:isolated
 ```
 
-La revisión visual reciente incluye el navbar de escritorio, el menú móvil y el desplegable de servicios. Se comprobaron los límites del horario de Chile y sus diferencias de hora de verano/invierno. Los resultados de validación de la entrega se documentan en el pull request; no se consideran aprobadas las verificaciones que no hayan podido ejecutarse.
+Las capturas de esta versión se tomaron en Chrome con el portafolio ejecutándose de forma local, a 1440 px en escritorio y 390 px en móvil.
 
 ## Documentación y recursos
 

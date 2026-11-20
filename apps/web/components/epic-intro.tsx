@@ -11,6 +11,7 @@ export function EpicIntro() {
   const skipRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
+    if (window.location.pathname.startsWith('/proyectos/destacados/')) return;
     try { if (sessionStorage.getItem(sessionKey)) return; } catch { /* Storage is optional. */ }
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     setActive(true);

@@ -2,6 +2,13 @@
 .orbit-hero { background:radial-gradient(ellipse at 73% 38%,#337ee8 0,transparent 57%),radial-gradient(ellipse at 12% 88%,#1979da 0,transparent 53%),linear-gradient(125deg,#1757b4,#1d65ce 52%,#184da7); }
 .orbit-hero::before { display:none; }
 .orbit-hero::after { display:none; }
+.home-section-divider {
+  width:min(1120px,calc(100% - 36px));
+  height:1px;
+  margin:0 auto;
+  border:0;
+  background:linear-gradient(90deg,#e4edf7,#b6cbe2 48%,#e4edf7);
+}
 .orbit-hero .aurora { opacity:.04; }
 .orbit-hero .digital-fireworks { opacity:.08; }
 .hero-ecosystem .stack-network { opacity:.35; }
@@ -15,6 +22,12 @@
 .hero-composition .typewriter-text.code-comment { color:#c5ddf8; }
 .hero-composition h1 em .typewriter-text.code-string { color:#fff; -webkit-text-stroke:.6px #122e55; text-shadow:0 2px 5px #06316a30; }
 .hero-composition .hero-degree,.hero-composition .hero-degree>span { color:#d5e7ff; }
+.hero-composition .orbit-intro h1 { color:#fff; text-wrap:balance; }
+.hero-composition h1 .hero-greeting { min-height:0; color:#d5e7ff; margin-bottom:9px; }
+.hero-composition h1 em { color:#bfe8ff; white-space:nowrap; }
+.hero-composition .orbit-intro .hero-degree { margin-top:12px; font-size:.85rem; }
+.hero-composition .orbit-intro .hero-tagline { margin-top:12px; color:#edf6ff; font-size:.84rem; line-height:1.65; }
+.hero-composition .hero-action-primary,.hero-composition .hero-action-secondary { min-height:44px; font-size:.75rem; }
 .hero-action-primary { background:#fff; color:#1853a2; border-color:#fff; box-shadow:0 5px 18px #082d6b25; }
 .hero-action-secondary { background:#ffffff12; color:#fff; border-color:#b9d8ff75; box-shadow:none; }
 .hero-action-secondary:hover { background:#ffffff26; }

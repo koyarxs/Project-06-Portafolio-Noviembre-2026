@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { NavIcon, type NavIconName } from './nav-icon';
 
-const links: readonly [string, string, NavIconName][] = [['/', 'Inicio', 'home'], ['/#portafolio', 'Portafolio', 'stack'], ['/#stack', 'Mi stack', 'stack'], ['/sobre-mi', 'Sobre mí', 'person'], ['/experiencia', 'Trayectoria', 'career']];
+const links: readonly [string, string, NavIconName][] = [['/', 'Inicio', 'home'], ['/#stack', 'Mi stack', 'stack'], ['/#portafolio', 'Portafolio', 'stack'], ['/sobre-mi', 'Sobre mí', 'person'], ['/experiencia', 'Trayectoria', 'career']];
 export function Navigation() {
   const path = usePathname();
   const [open, setOpen] = useState(false);

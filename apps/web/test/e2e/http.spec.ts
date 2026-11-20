@@ -70,23 +70,20 @@ test('keeps the authorized portfolio content visible when the API is offline', a
   expect(html).toContain('/images/yerko-hero-v2.png');
   expect(html).toContain('https://flymaster.cl');
   expect(html).toContain('github.com/koyarxs/Project-02-FlyMaster');
-  expect(html).toContain('Repositorio privado');
+  expect(html).toContain('Repositorio de FlyMaster en GitHub · privado, requiere acceso');
   const contact = await (await request.get('/contacto')).text();
   expect(contact).toContain('https://github.com/koyarxs');
   expect(contact).toContain('linkedin.com/in/yerko-andr');
 });
 
 
-test('renders the Veltrix guestbook and the three interaction circles', async ({ request }) => {
+test('keeps visits and likes visible after removing public comments', async ({ request }) => {
   const html = await (await request.get('/')).text();
-  expect(html.includes('COMUNIDAD / YB VELTRIX SOLUTIONS')).toBe(true);
-  expect(html).toContain('id="comentarios"');
-  expect(html).toContain('Nombre público');
-  expect(html).toContain('Categoría');
-  expect(/maxLength="2000"/i.test(html)).toBe(true);
-  expect(html).toContain('Visitas, Me gusta y comentarios');
-  expect(html).toContain('Lo que dicen');
-  expect(html).not.toContain('Quiero comentar sobre');
+  expect(html).toContain('aria-label="Visitas y Me gusta"');
+  expect(html).toContain('Visitas al portafolio');
+  expect(html).toContain('Me gusta este portafolio');
+  expect(html).not.toContain('id="comentarios"');
+  expect(html).not.toContain('href="/#comentarios"');
 });
 test('rejects cross-origin writes, unauthenticated moderation and forged sessions', async ({ request }) => {
   for (const path of ['/api/community','/api/community/uploads','/api/visitors','/api/community-admin/session']) {

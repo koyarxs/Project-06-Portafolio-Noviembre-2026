@@ -1,0 +1,224 @@
+.page {
+  --ink: #172943;
+  --muted: #445a74;
+  --accent: #205b98;
+  --line: #d5e1ee;
+  --columns: minmax(0, .36fr) minmax(0, 1fr);
+  --column-gap: clamp(24px, 5vw, 66px);
+  color: var(--ink);
+  background: #f9fbfd;
+  padding-bottom: 28px;
+}
+
+.width { width: min(1000px, calc(100% - 40px)); margin-inline: auto; }
+
+.banner {
+  overflow: clip;
+  background: radial-gradient(ellipse at 23% 72%, #22496e 0, transparent 47%), #0f2038;
+  border-bottom: 3px solid #4689cf;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: var(--columns);
+  align-items: center;
+  gap: var(--column-gap);
+  padding-block: clamp(27px, 4.5vw, 51px);
+}
+
+.intro { grid-column: 2; grid-row: 1; min-width: 0; }
+
+.intro h1 {
+  margin: 0 0 7px;
+  color: #f7fbff;
+  font: 550 clamp(2.125rem, 4vw, 2.625rem)/1.08 'Newsreader Variable', Georgia, serif;
+  letter-spacing: -.036em;
+}
+
+.intro p, .copy p {
+  max-width: 64ch;
+  margin: 0;
+  color: var(--muted);
+  font-size: .9375rem;
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+
+.intro .name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 11px;
+  color: #a5cfff;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+.intro .name::before { content: ''; width: 20px; flex: none; height: 1px; background: #7fbbff; }
+.intro p:not(.name) { color: #d5e4f4; }
+
+.actions, .links { display: flex; flex-wrap: wrap; align-items: center; gap: 5px 16px; }
+.actions { margin-top: 17px; }
+.links { margin-top: 10px; }
+
+.primary, .download, .links a, .textLink {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 7px;
+  color: var(--accent);
+  font-size: .84rem;
+  font-weight: 800;
+}
+
+.primary { padding-inline: 13px; border-radius: 7px; background: #e7f2ff; color: #173a60; }
+.primary:hover { background: #bedcff; }
+.download { color: #c5e1ff; }
+.download:hover, .links a:hover, .textLink:hover { text-decoration: underline; text-underline-offset: 4px; }
+.page :is(a, button):focus-visible { outline: 2px solid #1c61a5; outline-offset: 3px; }
+.banner a:focus-visible { outline-color: #d2e9ff; }
+.page :is(.actions, .links, .textLink) svg { flex: none; }
+
+.visual {
+  position: relative;
+  isolation: isolate;
+  grid-column: 1;
+  grid-row: 1;
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  min-height: clamp(185px, 26vw, 278px);
+  margin: 0;
+}
+
+.visual::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: -7% -7% 0;
+  background: url('/images/stack-circuits.svg') center / 100% auto no-repeat,
+    radial-gradient(ellipse at center, #4083c74f, transparent 64%);
+  opacity: .76;
+}
+
+.visual::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 14% 0 7% 13%;
+  border-right: 1px solid #82bbe29e;
+  border-bottom: 1px solid #82bbe29e;
+  border-bottom-right-radius: 18px;
+}
+
+.visual img {
+  display: block;
+  width: min(252px, 91%);
+  height: auto;
+  border-radius: 4px 32px 4px 4px;
+  box-shadow: 0 9px 23px #050d1c38;
+}
+
+.section {
+  display: grid;
+  grid-template-columns: var(--columns);
+  gap: 12px var(--column-gap);
+  padding-block: clamp(25px, 4.5vw, 49px);
+}
+
+.section + .section { border-top: 1px solid var(--line); }
+.section > h2 {
+  margin: 0;
+  font: 550 clamp(1.48rem, 2.6vw, 1.875rem)/1.15 'Newsreader Variable', Georgia, serif;
+  letter-spacing: -.018em;
+}
+
+.copy { min-width: 0; }
+.copy > p + p { margin-top: 9px; }
+.copy .profileMeta { font-size: .8rem; font-weight: 650; }
+.copy h3 { margin: 0 0 4px; font-size: 1rem; line-height: 1.44; font-weight: 800; }
+.copy > .textLink { margin-top: 4px; }
+.workSection { grid-template-columns: minmax(0, 1fr); row-gap: 20px; }
+.approach {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 20px;
+  row-gap: 22px;
+  margin: 0 0 10px;
+  padding: 0;
+  list-style: none;
+}
+
+.approach li {
+  --case-accent: #2e745b;
+  --case-paper: #edf6ef;
+  display: flex;
+  flex-direction: column;
+  border-top: 2px solid var(--case-accent);
+}
+.approach [data-project='zenvik'] { --case-accent: #4168a0; --case-paper: #ecf2fa; }
+.approach [data-project='fraudshield'] { --case-accent: #92601b; --case-paper: #f8f0de; }
+.approach h3, .veltrixSection h3 { display: flex; align-items: center; gap: 8px; }
+.approachIcon { display: grid; flex: 0 0 30px; place-items: center; height: 30px; color: var(--case-accent); background: var(--case-paper); border-radius: 6px; }
+.approach .textLink { margin-top: auto; align-self: flex-start; }
+.evidence {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  margin-bottom: 13px;
+  overflow: hidden;
+  background: var(--case-paper);
+}
+.evidence img { object-fit: contain; }
+.riskFlow {
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: 8px;
+  padding: 10px 14px;
+  color: #f5d69d;
+  background: #15243c;
+}
+.riskFlow span { font-size: .72rem; font-weight: 700; }
+.riskFlow p { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; color: #fff; font-size: .85rem; font-weight: 800; }
+.riskFlow svg { width: 14px; color: #f5d69d; }
+.veltrixSection h3 img { flex: none; object-fit: contain; }
+
+@media (min-width: 761px) {
+  .width { width: min(1000px, calc(100% - 106px)); margin-inline: max(82px, calc((100% - 1000px) / 2)) auto; }
+}
+
+@media (max-width: 760px) {
+  :global([data-intro-content]):has(.page) > :global([data-visitor-rail]) {
+    position: relative;
+    inset: auto;
+    justify-content: center;
+    transform: none;
+    padding-block: 8px 12px;
+    background: #edf3fa;
+  }
+}
+
+@media (max-width: 700px) {
+  .hero, .section { grid-template-columns: minmax(0, 1fr); }
+  .hero { gap: 23px; }
+  .intro, .visual { grid-area: auto; }
+  .intro h1 { font-size: clamp(1.875rem, 7vw, 2.125rem); }
+  .visual { min-height: 168px; }
+  .visual img { width: 156px; border-top-right-radius: 22px; }
+  .visual::after { inset-inline: 22% 18%; }
+}
+
+@media (max-width: 900px) {
+  .approach { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 640px) {
+  .approach { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .visual::before, .visual img { animation: portrait-enter .36s ease-out both; }
+}
+@keyframes portrait-enter {
+  from { opacity: .74; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}

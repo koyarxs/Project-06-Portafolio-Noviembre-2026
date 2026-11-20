@@ -4,11 +4,11 @@
 
 Workspace `apps/web`: Next.js 16.4.6, React 19.3.1, TypeScript 5.9.3 y Tailwind CSS 4.3.5, con el único lockfile de la raíz. No se modificaron modelos Prisma, migraciones, seeds ni contratos de NestJS.
 
-Rutas: `/`, `/proyectos`, `/proyectos/[slug]`, `/sobre-mi`, `/experiencia`, `/laboratorios` y `/contacto`.
+Rutas públicas: `/`, `/proyectos`, `/proyectos/[slug]`, `/proyectos/destacados/[slug]`, `/sobre-mi`, `/experiencia`, `/servicios`, `/laboratorios` y `/contacto`. El panel de moderación se encuentra en `/admin/community`.
 
 `app/` contiene páginas, layout, metadata, robots, sitemap, Open Graph y estados de error/404. `components/` contiene navegación, estructura, estados vacíos/carga, proyectos, capítulos de casos, evidencias y trayectoria. `lib/` contiene contratos JSON comprobados en runtime, cliente de API exclusivo del servidor, SEO y utilidades. `test/` contiene componentes, contratos y pruebas HTTP con fixtures aisladas de PostgreSQL.
 
-Las páginas consultan la API con Server Components, sin exponer su dirección interna o credenciales mediante NEXT_PUBLIC_. Solo la navegación interactiva y el botón de recuperación son Client Components. Filtros y paginación conservan sus parámetros en URL.
+Las páginas consultan la API con Server Components, sin exponer su dirección interna o credenciales mediante NEXT_PUBLIC_. Los componentes de cliente incluyen la navegación, los filtros de proyectos destacados, las galerías y el asistente. Filtros y paginación conservan sus parámetros en URL.
 
 ## Configuración
 
@@ -21,6 +21,7 @@ Copiar `apps/web/.env.example` a `apps/web/.env.local` solo si se necesitan valo
 | IMAGE_HOSTS | Hosts HTTPS exactos aprobados para next/image, sin comodines |
 | VERIFIED_DEMO_URLS | URLs exactas verificadas editorialmente antes de mostrar una demo |
 | VERIFIED_DEPLOYMENT_URLS | URLs verificadas que además deben llegar como ACTIVE desde la API |
+| TAWK_DIRECT_CHAT_URL | Enlace HTTPS opcional de atención humana en tawk.to |
 | PORT | Puerto opcional de Next; el predeterminado es 3000 |
 
 La API actual no contiene un campo de verificación de demos/despliegues. Las listas de URLs aprobadas evitan afirmar que cualquier enlace guardado es una demo funcional o infraestructura verificada. No se ejecutan sondas contra destinos arbitrarios. Las imágenes no aprobadas pueden abrirse como enlaces seguros; no se fabrican capturas.
@@ -53,7 +54,7 @@ Para usar otro puerto: `$env:PORT='3100'` antes de iniciar Next.js. No detener o
 
 El build usa un solo worker para reducir el pico de memoria en este equipo. Ante recursos limitados puede ejecutarse en la terminal `$env:NODE_OPTIONS='--max-old-space-size=512 --max-semi-space-size=8'`; no se omiten los checks de TypeScript.
 
-## Verificación realizada
+## Verificación de la implementación inicial
 
 - Nueve pruebas de componentes/contratos aprobadas.
 - Seis pruebas HTTP sobre el build de producción aprobadas: rutas y metadata, caso de proyecto, filtros, privados/404, vacío frente a indisponibilidad y sitemap/robots. Sus datos viven en una API de prueba local y no se escriben en PostgreSQL.
@@ -100,3 +101,9 @@ Portfolio Community avanzado: implementación, endpoints, seguridad, configuraci
 Tarjetas finales compactas: solo captura, nombre, etiqueta de origen y stack en chips; GitHub/sitio como iconos. Se retiran descripciones, estados, fechas y filas de contexto de las tarjetas, conservando los datos editoriales. El reverso comparte `VeltrixLogo` con la navbar y su recurso `veltrix-navbar-reference.png`. FlyMaster muestra captura real de https://flymaster.cl, obtenida en navegador el 15 de noviembre de 2026. FraudShield conserva un esquema identificado porque no existe captura documentada de su interfaz.
 
 Acabado visual de la referencia: tarjetas blancas más redondeadas, captura real dentro de un marco de portátil construido en CSS, curva azul decorativa, tipo de proyecto y tecnologías en pastillas. Se conserva la grilla compacta de tres columnas y el reverso con el logo compartido de la navbar. No se inventan capturas móviles ni funcionalidades de e-commerce.
+
+## Actualización del 20 de noviembre de 2026
+
+La portada integra el carrusel y el catálogo tecnológico, la galería filtrable y las preguntas frecuentes. Los seis proyectos destacados tienen rutas estáticas propias, con capturas y videos según el material de cada ficha. El catálogo de la API conserva sus rutas dinámicas. Las páginas Sobre mí, Trayectoria y Servicios presentan el perfil, la oferta profesional y las credenciales actualizadas.
+
+El Asistente Veltrix usa respuestas preparadas a partir del contenido del portafolio. Si el navegador expone un modelo local disponible, el asistente puede usarlo para reconocer la intención de la consulta. La atención humana se habilita mediante el enlace opcional de tawk.to. Las capturas actuales están en el [README](../README.md#capturas-de-la-versión-actual).

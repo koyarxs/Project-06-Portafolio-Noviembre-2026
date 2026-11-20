@@ -1,13 +1,13 @@
-import { CommunitySection } from '../components/community-section';
 import Link from 'next/link';
 import Image from 'next/image';
 import { PortfolioSection } from '../components/public-work';
 import { TechnologyStack } from '../components/technology-stack';
+import { TechnologyCarousel } from '../components/technology-carousel';
 import { DigitalFireworks } from '../components/digital-fireworks';
-import { TypewriterText } from '../components/typewriter-text';
 import { DeveloperAvatar } from '../components/developer-avatar';
 import { HeroSequence } from '../components/hero-sequence';
 import { HeroActions } from '../components/hero-actions';
+import { FaqSection } from '../components/faq-section';
 import { pageMetadata } from '../lib/seo';
 export const metadata = pageMetadata('Yerko Barrera · Full Stack Developer', 'Ingeniero en Computación e Informática. Proyectos Full Stack, desde la interfaz hasta los datos.', '/');
 export default function Home() {
@@ -15,7 +15,13 @@ export default function Home() {
  <section className="blue-hero orbit-hero" aria-labelledby="hero-title">
    <DigitalFireworks /><div className="aurora aurora-mint" aria-hidden="true" /><div className="aurora aurora-violet" aria-hidden="true" />
    <HeroSequence>
-   <div className="orbit-intro"><h1 id="hero-title"><span className="hero-greeting"><TypewriterText text="Hola, soy Yerko." delay={200} speed={50} tone="keyword" /></span><TypewriterText text="Transformo ideas en" delay={1100} speed={38} tone="function" /><br /><em><TypewriterText text="software que conecta." delay={1900} speed={38} tone="string" /></em></h1><p className="hero-tagline"><TypewriterText text="// Diseño interfaces claras y construyo los sistemas que las hacen posibles. Del primer concepto al último detalle." delay={2900} speed={17} tone="comment" /></p><DeveloperAvatar /><p className="hero-degree"><TypewriterText text="Ingeniero en Computación e Informática" delay={5000} speed={28} tone="type" /><span><TypewriterText text="Valparaíso, Chile · Veltrix Solutions" delay={6100} speed={25} tone="string" /></span></p><HeroActions /></div>
+   <div className="orbit-intro">
+     <h1 id="hero-title"><span className="hero-greeting">Hola, soy Yerko.</span>{' '}Desarrollador <em>Full Stack</em></h1>
+     <p className="hero-degree">Ingeniero en Computación e Informática</p>
+     <p className="hero-tagline">Desarrollo aplicaciones web con React, Next.js y TypeScript. Construyo APIs con NestJS y conecto sus datos con PostgreSQL.</p>
+     <DeveloperAvatar />
+     <HeroActions />
+   </div>
    <div className="hero-ecosystem">
    <div className="orbit-stage">
      <div className="orbit-aura" aria-hidden="true" />
@@ -44,9 +50,15 @@ export default function Home() {
    </div>
    </HeroSequence>
  </section>
- <PortfolioSection />
+ <hr className="home-section-divider" aria-hidden="true" />
+ <TechnologyCarousel />
+ <hr className="home-section-divider" aria-hidden="true" />
  <TechnologyStack />
+ <hr className="home-section-divider" aria-hidden="true" />
+ <PortfolioSection />
+ <hr className="home-section-divider" aria-hidden="true" />
  <section className="blue-about"><div className="site-width blue-about-grid"><div><p className="blue-eyebrow">UN POCO SOBRE MÍ</p><h2>Me gusta entender<br />cómo encaja <span>todo.</span></h2></div><div><p>Soy Yerko, Ingeniero en Computación e Informática y Licenciado en Ingeniería por la Universidad Andrés Bello, con más de 4 años de experiencia profesional en TI.</p><p>Como fundador de YB Veltrix Solutions, desarrollo aplicaciones web, soluciones empresariales y plataformas SaaS. Conecto frontend, backend, datos y testing con prácticas DevOps, poniendo el foco en seguridad y escalabilidad.</p><Link href="/sobre-mi" className="text-link">Conocer mi perfil ↗</Link></div></div></section>
- <CommunitySection />
+ <hr className="home-section-divider" aria-hidden="true" />
+ <FaqSection />
  </>;
 }
