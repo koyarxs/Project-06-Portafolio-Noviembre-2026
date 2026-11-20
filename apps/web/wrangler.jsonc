@@ -1,6 +1,6 @@
 {
   "$schema": "../../node_modules/wrangler/config-schema.json",
-  "name": "portafolio-veltrix",
+  "name": "project-06-portafolio-noviembre-2026",
   "main": ".open-next/worker.js",
   "compatibility_date": "2026-11-20",
   "compatibility_flags": ["nodejs_compat"],

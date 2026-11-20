@@ -34,32 +34,30 @@ npm run cf:preview --workspace @portfolio/web
 
 ## Workers Builds con GitHub
 
-Tras autorizar el primer despliegue y publicar estos cambios en GitHub, ve a **Workers & Pages → Create application → GitHub**. Autoriza la integración para `koyarxs/Project-06-Portafolio-Noviembre-2026` y selecciona el repositorio. Para un Worker existente con el mismo nombre, usa **Settings → Builds → Connect**.
+En **Workers & Pages → project-06-portafolio-noviembre-2026 → Settings → Builds**, revisa la conexión existente con `koyarxs/Project-06-Portafolio-Noviembre-2026`.
 
 | Campo | Valor |
 | --- | --- |
 | Tipo de proyecto | **Worker** |
-| Nombre | `portafolio-veltrix` |
+| Nombre | `project-06-portafolio-noviembre-2026` |
 | Rama de producción | `main` |
-| Root directory | `apps/web` |
-| Build command | `npm ci --prefix ../.. --include=dev && npm run cf:build` |
-| Deploy command | `npm run cf:deploy` |
+| Root directory | `/` |
+| Build command | `npm run cf:build --workspace @portfolio/web` |
+| Deploy command | `npm run cf:deploy --workspace @portfolio/web` |
 | Preview builds | Desactivadas inicialmente. Si se habilitan, usa un backend y secretos separados de producción. |
-| Build variables | `NODE_VERSION=24.22.0`, `SKIP_DEPENDENCY_INSTALL=1` y `SITE_URL` con la URL HTTPS asignada al Worker o el dominio final |
+| Build variables | `NODE_VERSION=24.22.0` y `SITE_URL` con el origen HTTPS asignado al Worker o el dominio final |
+| Instalación | Automática desde la raíz, con las dependencias de desarrollo. Elimina `SKIP_DEPENDENCY_INSTALL` si estaba configurada para el flujo anterior. |
 | API token del build | Token administrado por Workers Builds |
 
-El nombre del panel debe coincidir con `apps/web/wrangler.jsonc`. El comando instala desde el lockfile raíz y ejecuta OpenNext desde el workspace web. **Save and Deploy** inicia el primer despliegue. Los siguientes cambios enviados a `main` activan Workers Builds. Si eliges el flujo manual, configura las variables y autentica la cuenta localmente con `npm exec --workspace @portfolio/web -- wrangler login` antes de ejecutar el despliegue autorizado. [Monorepos en Workers Builds](https://developers.cloudflare.com/workers/ci-cd/builds/advanced-setups/) · [Conexión con GitHub](https://developers.cloudflare.com/workers/ci-cd/builds/) · [Variables de compilación](https://developers.cloudflare.com/workers/ci-cd/builds/build-image/)
+El nombre del panel debe coincidir con `apps/web/wrangler.jsonc`. npm ejecuta cada script dentro del workspace web, donde OpenNext y Wrangler encuentran esa configuración. `cf:build` genera el artefacto y `cf:deploy` publica ese mismo artefacto después de validar el origen canónico. Los cambios enviados a `main` activan Workers Builds. Revisa **Deployments → View Build History**, selecciona el build del commit nuevo y usa **Retry build** si hace falta. [Configuración de Workers Builds](https://developers.cloudflare.com/workers/ci-cd/builds/configuration/) · [Historial y reintentos](https://developers.cloudflare.com/workers/ci-cd/builds/troubleshoot/)
 
-```powershell
-# Con SITE_URL configurada en el entorno de la terminal
-npm run cf:build --workspace @portfolio/web
-npm run cf:check --workspace @portfolio/web
-npm run cf:deploy --workspace @portfolio/web
-```
+Si el dashboard exige encontrar Wrangler en el directorio raíz configurado antes de invocar los scripts, selecciona `apps/web` en ese mismo Worker, fija `SKIP_DEPENDENCY_INSTALL=1`, usa `npm ci --prefix ../.. --include=dev && npm run cf:build` para compilar y `npm run cf:deploy` para desplegar. El lockfile se sigue leyendo desde la raíz del repositorio. [Monorepos en Workers Builds](https://developers.cloudflare.com/workers/ci-cd/builds/advanced-setups/)
 
 ## Variables y secretos de producción
 
 Configura los valores de ejecución en **Settings → Variables and Secrets** del Worker. `keep_vars` conserva las variables del panel durante el despliegue.
+
+El frontend no exige variables `NEXT_PUBLIC_*`. `SITE_URL` es un origen público y configura los metadatos canónicos. La URL del backend se configura del lado del servidor. Las claves de firma y administración se guardan como secretos de ejecución.
 
 | Nombre | Dónde y valor |
 | --- | --- |
